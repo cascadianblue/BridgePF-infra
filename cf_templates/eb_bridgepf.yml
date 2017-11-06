@@ -863,22 +863,24 @@ Resources:
             - '-'
             - - !Ref 'AWS::StackName'
               - 400Count
-  AWSCW400Alarm:
-    Type: "AWS::CloudWatch::Alarm"
-    Properties:
-      ActionsEnabled: true
-      AlarmActions:
-        - !Ref AWSSNSTopic
-      ComparisonOperator: GreaterThanOrEqualToThreshold
-      EvaluationPeriods: 1
-      MetricName: !Join
-        - '-'
-        - - !Ref 'AWS::StackName'
-          - 400Count
-      Namespace: LogMetrics/400s
-      Period: 3600
-      Statistic: Sum
-      Threshold: 30
+# Temporarily commenting out our 400s alarm until the DST bug is fixed.
+# See https://sagebionetworks.jira.com/browse/BRIDGE-1991
+#  AWSCW400Alarm:
+#    Type: "AWS::CloudWatch::Alarm"
+#    Properties:
+#      ActionsEnabled: true
+#      AlarmActions:
+#        - !Ref AWSSNSTopic
+#      ComparisonOperator: GreaterThanOrEqualToThreshold
+#      EvaluationPeriods: 1
+#      MetricName: !Join
+#        - '-'
+#        - - !Ref 'AWS::StackName'
+#          - 400Count
+#      Namespace: LogMetrics/400s
+#      Period: 3600
+#      Statistic: Sum
+#      Threshold: 30
   AWSCW403MetricFilter:
     Type: "AWS::Logs::MetricFilter"
     DependsOn: AWSLogsLogGroup
