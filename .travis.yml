@@ -2,7 +2,11 @@ sudo: false
 language: python
 python: 3.4
 cache: pip
-
+branches:
+  only:
+  - develop
+  - uat
+  - prod
 env:
   global:
     - STACK_NAME=bridgepf-$TRAVIS_BRANCH
