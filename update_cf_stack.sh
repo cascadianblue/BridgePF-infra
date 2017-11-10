@@ -21,6 +21,7 @@ eval export "EmailUnsubscribeToken=\$EmailUnsubscribeToken_$TRAVIS_BRANCH"
 eval export "HibernateConnectionPassword=\$HibernateConnectionPassword_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUrl=\$HibernateConnectionUrl_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUsername=\$HibernateConnectionUsername_$TRAVIS_BRANCH"
+eval export "HostPostfix=\$HostPostfix_$TRAVIS_BRANCH"
 eval export "SnsKey=\$SnsKey_$TRAVIS_BRANCH"
 eval export "SnsSecretKey=\$SnsSecretKey_$TRAVIS_BRANCH"
 eval export "SSLCertArn=\$SSLCertArn_$TRAVIS_BRANCH"
@@ -30,6 +31,7 @@ eval export "SysopsEmail=\$SysopsEmail_$TRAVIS_BRANCH"
 eval export "UploadBucket=\$UploadBucket_$TRAVIS_BRANCH"
 eval export "UploadCmsCertBucket=\$UploadCmsCertBucket_$TRAVIS_BRANCH"
 eval export "UploadCmsPrivBucket=\$UploadCmsPrivBucket_$TRAVIS_BRANCH"
+eval export "WebservicesUrl=\$WebservicesUrl_$TRAVIS_BRANCH"
 
 # deploy with evaluated vars
 aws cloudformation update-stack \
@@ -70,6 +72,7 @@ ParameterKey=HibernateConnectionPassword,ParameterValue=$HibernateConnectionPass
 ParameterKey=HibernateConnectionUrl,ParameterValue=$HibernateConnectionUrl \
 ParameterKey=HibernateConnectionUsername,ParameterValue=$HibernateConnectionUsername \
 ParameterKey=HibernateConnectionUsessl,ParameterValue=true \
+ParameterKey=HostPostfix,ParameterValue=$HostPostfix \
 ParameterKey=JavaOpts,ParameterValue='-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar' \
 ParameterKey=NewRelicAppName,ParameterValue=$DNS_HOSTNAME \
 ParameterKey=NewRelicLicenseKey,ParameterValue=$NewRelicLicenseKey \
@@ -82,4 +85,4 @@ ParameterKey=SysopsEmail,ParameterValue="$SysopsEmail" \
 ParameterKey=UploadBucket,ParameterValue=$UploadBucket \
 ParameterKey=UploadCmsCertBucket,ParameterValue=$UploadCmsCertBucket \
 ParameterKey=UploadCmsPrivBucket,ParameterValue=$UploadCmsPrivBucket \
-ParameterKey=WebservicesUrl,ParameterValue=https://$DNS_HOSTNAME.$DNS_DOMAIN
+ParameterKey=WebservicesUrl,ParameterValue=$WebservicesUrl
