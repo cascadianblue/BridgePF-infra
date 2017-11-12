@@ -529,14 +529,6 @@ Resources:
           OptionName: NEW_RELIC_LICENSE_KEY
           Value: !Ref NewRelicLicenseKey
         - Namespace: 'aws:elasticbeanstalk:application:environment'
-          OptionName: REDISCLOUD_URL
-          Value: !Join
-            - ''
-            - - 'redis://'
-              - !GetAtt AWSECCacheCluster.RedisEndpoint.Address
-              - ':'
-              - !GetAtt AWSECCacheCluster.RedisEndpoint.Port
-        - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: SNS_KEY
           Value: !Ref SnsKey
         - Namespace: 'aws:elasticbeanstalk:application:environment'
