@@ -1,4 +1,5 @@
 .idea/
+git-crypt.key
 crypt-key
 
 # Elastic Beanstalk Files
