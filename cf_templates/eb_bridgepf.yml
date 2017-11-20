@@ -21,7 +21,7 @@
 #     --parameters ParameterKey=EC2InstanceType,ParameterValue=t2.micro \
 #     ...[all params neeeded for app]
 #
-Description: AWS Elastic Beanstalk Application
+Description: Resources for BridgePF Application
 AWSTemplateFormatVersion: 2010-09-09
 Outputs:
   AppDashboard:
@@ -95,28 +95,6 @@ Outputs:
     Value: !Ref UploadCmsPrivBucket
     Export:
       Name: !Sub '${AWS::StackName}-UploadCmsPrivBucket'
-Mappings:
-  AWSLoadbalancerAccount:
-    us-east-1:
-      ARN: '127311923021'
-    us-west-2:
-      ARN: '797873946194'
-    us-west-1:
-      ARN: 027434742980
-    eu-west-1:
-      ARN: '156460612806'
-    eu-central-1:
-      ARN: 054676820928
-    ap-southeast-1:
-      ARN: '114774131450'
-    ap-northeast-1:
-      ARN: '582318560864'
-    ap-southeast-2:
-      ARN: '783225319266'
-    ap-northeast-2:
-      ARN: '600734575887'
-    sa-east-1:
-      ARN: '507241528517'
 Parameters:
   AppDeployBucket:
     Type: String
