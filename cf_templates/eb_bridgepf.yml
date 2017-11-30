@@ -67,14 +67,22 @@ Outputs:
         - !GetAtt AWSECCacheCluster.RedisEndpoint.Port
     Export:
       Name: !Sub '${AWS::StackName}-ElastiCacheUrl'
-  AWSIAMBridgepfServiceUserAccessKeyId:
+  AWSIAMBridgepfServiceUserAccessKey:
     Value: !Ref AWSIAMBridgepfServiceUserAccessKey
     Export:
       Name: !Sub '${AWS::StackName}-BridgepfServiceUserAccessKey'
-  AWSIAMBridgepfServiceUserSecretAccessKeyId:
+  AWSIAMBridgepfServiceUserSecretAccessKey:
     Value: !GetAtt AWSIAMBridgepfServiceUserAccessKey.SecretAccessKey
     Export:
-      Name: !Sub '${AWS::StackName}-BridgepfServiceUserSecretAccessKeyId'
+      Name: !Sub '${AWS::StackName}-BridgepfServiceUserSecretAccessKey'
+  AWSIAMBridgepfLocalServiceUserAccessKey:
+    Value: !Ref AWSIAMBridgepfLocalServiceUserAccessKey
+    Export:
+      Name: !Sub '${AWS::StackName}-BridgepfLocalServiceUserAccessKey'
+  AWSIAMBridgepfLocalServiceUserSecretAccessKey:
+    Value: !GetAtt AWSIAMBridgepfLocalServiceUserAccessKey.SecretAccessKey
+    Export:
+      Name: !Sub '${AWS::StackName}-BridgepfLocalServiceUserSecretAccessKey'
   AttachmentBucket:
     Value: !Ref AttachmentBucket
     Export:
