@@ -163,7 +163,12 @@ Parameters:
     NoEcho: true
   BridgeEnv:
     Type: String
-    Default: param_place_holder
+    Default: dev
+    AllowedValues:
+      - prod
+      - uat
+      - dev
+    ConstraintDescription: must specify dev, uat or prod.
   BridgeHealthcodeRedisKey:
     Type: String
     Default: param_place_holder
@@ -339,6 +344,8 @@ Parameters:
   UploadCmsPrivBucket:
     Type: String
     Default: param_place_holder
+Conditions:
+  CreateDevResources: !Equals [ !Ref BridgeEnv, dev ]
 Resources:
   AWSEBConfigurationTemplate:
     Type: 'AWS::ElasticBeanstalk::ConfigurationTemplate'
@@ -1235,6 +1242,39 @@ Resources:
                 - - 'arn:aws:s3:::'
                   - !Ref ConsentsBucket
                   - /*
+  # special policy for developer testing
+  IAMBridgepfLocalS3ManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
+    Condition: CreateDevResources
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: ListAccess
+            Action:
+              - 's3:ListBucket'
+              - 's3:GetBucketLocation'
+            Effect: Allow
+            Resource:
+              - 'arn:aws:s3:::org-sagebridge-upload-local'
+              - 'arn:aws:s3:::org-sagebridge-attachment-local'
+              - 'arn:aws:s3:::org-sagebridge-upload-cms-cert-local'
+              - 'arn:aws:s3:::org-sagebridge-upload-cms-priv-local'
+              - 'arn:aws:s3:::org-sagebridge-consents-local'
+          - Sid: ModAccess
+            Action:
+              - 's3:PutObject'
+              - 's3:PutObjectAcl'
+              - 's3:GetObject'
+              - 's3:GetObjectAcl'
+              - 's3:DeleteObject'
+            Effect: Allow
+            Resource:
+              - 'arn:aws:s3:::org-sagebridge-upload-local/*'
+              - 'arn:aws:s3:::org-sagebridge-attachment-local/*'
+              - 'arn:aws:s3:::org-sagebridge-upload-cms-cert-local/*'
+              - 'arn:aws:s3:::org-sagebridge-upload-cms-priv-local/*'
+              - 'arn:aws:s3:::org-sagebridge-consents-local/*'
   IAMBridgepfECManagedPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
     Description: Provide full access to ElastiCache except for delete
@@ -1295,3 +1335,21 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonRDSFullAccess
         - !Ref IAMBridgepfECManagedPolicy
         - !Ref IAMBridgepfSQSManagedPolicy
+  # special service user for developer testing
+  AWSIAMBridgepfLocalServiceUserAccessKey:
+    Type: 'AWS::IAM::AccessKey'
+    Properties:
+      UserName: !Ref AWSIAMBridgepfLocalServiceUser
+  AWSIAMBridgepfLocalServiceUser:
+    Type: 'AWS::IAM::User'
+    Condition: CreateDevResources
+    Properties:
+      Groups:
+        - !Ref AWSIAMBridgepfServiceUserGroup
+        - !Ref AWSIAMBridgepfLocalServiceUserGroup
+  AWSIAMBridgepfLocalServiceUserGroup:
+    Type: 'AWS::IAM::Group'
+    Condition: CreateDevResources
+    Properties:
+      ManagedPolicyArns:
+        - !Ref IAMBridgepfLocalS3ManagedPolicy
