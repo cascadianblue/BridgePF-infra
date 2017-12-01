@@ -1336,6 +1336,7 @@ Resources:
     Type: 'AWS::IAM::Group'
     Properties:
       ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - !Ref IAMBridgepfS3ManagedPolicy
         - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
         - arn:aws:iam::aws:policy/AmazonSNSFullAccess
@@ -1360,4 +1361,5 @@ Resources:
     Condition: CreateDevResources
     Properties:
       ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - !Ref IAMBridgepfLocalS3ManagedPolicy
