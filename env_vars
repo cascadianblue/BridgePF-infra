@@ -1,4 +1,17 @@
 # environment variables for Sage-Bionetworks/BridgePF-infra
+
+# Static Env Parameters
+export AppHealthcheckUrl='HTTP:80/?study=api'
+export AuthCreateMysqlAccounts=true
+export AuthProvider=mysql
+export AwsEbHealthReportingSystem=
+export BridgeUser=heroku
+export EC2InstanceType=t2.small
+export ElastiCacheInstanceType=cache.t2.micro
+export HibernateConnectionUsessl=true
+export JavaOpts='-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar'
+
+# AWS Env Specific vars
 export AppDeployBucket_develop=org-sagebridge-bridgepf-deployment-bridgepf-develop
 export AppDeployBucket_prod=org-sagebridge-bridgepf-deployment-bridgepf-prod
 export AppDeployBucket_uat=org-sagebridge-bridgepf-deployment-bridgepf-uat

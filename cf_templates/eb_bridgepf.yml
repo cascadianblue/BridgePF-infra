@@ -1435,3 +1435,90 @@ Resources:
           - !Ref AWS::StackName
           - '/KmsKey'
       TargetKeyId: !Ref AWSKmsKey
+  # System parameter store
+  # CF does not support SecureString type. Secrets are managed with AWS CLI in update_cf_stack.sh
+  AWSSsmElasticacheUrlParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/ELASTICACHE_URL"
+      Type: "String"
+      Value: !Join
+        - ''
+        - - 'redis://'
+          - !GetAtt AWSECCacheCluster.RedisEndpoint.Address
+          - ':'
+          - !GetAtt AWSECCacheCluster.RedisEndpoint.Port
+  AWSSsmAuthCreateMysqlAccountsParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/AUTH_CREATE_MYSQL_ACCOUNTS"
+      Type: "String"
+      Value: !Ref AuthCreateMysqlAccounts
+  AWSSsmAuthProviderParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/AUTH_PROVIDER"
+      Type: "String"
+      Value: !Ref AuthProvider
+  AWSSsmBridgeEnvParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/BRIDGE_ENV"
+      Type: "String"
+      Value: !Ref BridgeEnv
+  AWSSsmBridgeUserParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/BRIDGE_USER"
+      Type: "String"
+      Value: !Ref BridgeUser
+  AWSSsmHostPostfixParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/HOST_POSTFIX"
+      Type: "String"
+      Value: !Ref HostPostfix
+  AWSSsmSysopsEmailParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/SYSOPS_EMAIL"
+      Type: "String"
+      Value: !Ref SysopsEmail
+  AWSSsmWebservicesUrlParameter:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Name: !Join
+        - ''
+        - - '/'
+          - !Ref AWS::StackName
+          - "/WEBSERVICES_URL"
+      Type: "String"
+      Value: !Ref WebservicesUrl
