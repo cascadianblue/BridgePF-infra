@@ -84,10 +84,12 @@ Outputs:
     Export:
       Name: !Sub '${AWS::StackName}-BridgepfServiceUserSecretAccessKey'
   AWSIAMBridgepfLocalServiceUserAccessKey:
+    Condition: CreateDevResources
     Value: !Ref AWSIAMBridgepfLocalServiceUserAccessKey
     Export:
       Name: !Sub '${AWS::StackName}-BridgepfLocalServiceUserAccessKey'
   AWSIAMBridgepfLocalServiceUserSecretAccessKey:
+    Condition: CreateDevResources
     Value: !GetAtt AWSIAMBridgepfLocalServiceUserAccessKey.SecretAccessKey
     Export:
       Name: !Sub '${AWS::StackName}-BridgepfLocalServiceUserSecretAccessKey'
@@ -1355,6 +1357,7 @@ Resources:
   # special service user for developer testing
   AWSIAMBridgepfLocalServiceUserAccessKey:
     Type: 'AWS::IAM::AccessKey'
+    Condition: CreateDevResources
     Properties:
       UserName: !Ref AWSIAMBridgepfLocalServiceUser
   AWSIAMBridgepfLocalServiceUser:
