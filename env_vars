@@ -4,7 +4,7 @@
 export AppHealthcheckUrl='HTTP:80/?study=api'
 export AuthCreateMysqlAccounts=true
 export AuthProvider=mysql
-export AwsEbHealthReportingSystem=
+export AwsEbHealthReportingSystem=enhanced
 export BridgeUser=heroku
 export EC2InstanceType=t2.small
 export ElastiCacheInstanceType=cache.t2.micro
