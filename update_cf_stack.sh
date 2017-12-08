@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# double interpolate from env_vars
+# double interpolate vars from travis
 eval export "AppDeployBucket=\$AppDeployBucket_$TRAVIS_BRANCH"
 eval export "AttachmentBucket=\$AttachmentBucket_$TRAVIS_BRANCH"
 eval export "AwsAutoScalingGroupName=\$AwsAutoScalingGroupName_$TRAVIS_BRANCH"
@@ -33,22 +33,22 @@ eval export "UploadCmsCertBucket=\$UploadCmsCertBucket_$TRAVIS_BRANCH"
 eval export "UploadCmsPrivBucket=\$UploadCmsPrivBucket_$TRAVIS_BRANCH"
 eval export "WebservicesUrl=\$WebservicesUrl_$TRAVIS_BRANCH"
 
-# deploy CF template with evaluated vars
+# deploy with evaluated vars
 aws cloudformation update-stack \
 --stack-name $STACK_NAME \
 --capabilities CAPABILITY_NAMED_IAM \
 --template-body file://cf_templates/eb_bridgepf.yml \
 --parameters \
 ParameterKey=AppDeployBucket,ParameterValue=$AppDeployBucket \
-ParameterKey=AppHealthcheckUrl,ParameterValue=$AppHealthcheckUrl \
+ParameterKey=AppHealthcheckUrl,ParameterValue='HTTP:80/?study=api' \
 ParameterKey=AttachmentBucket,ParameterValue=$AttachmentBucket \
-ParameterKey=AuthCreateMysqlAccounts,ParameterValue=$AuthCreateMysqlAccounts \
-ParameterKey=AuthProvider,ParameterValue=$AuthProvider \
+ParameterKey=AuthCreateMysqlAccounts,ParameterValue=true \
+ParameterKey=AuthProvider,ParameterValue=mysql \
 ParameterKey=AwsAutoScalingGroupName,ParameterValue=$AwsAutoScalingGroupName \
 ParameterKey=AwsAutoScalingMaxSize,ParameterValue=$AwsAutoScalingMaxSize \
 ParameterKey=AwsAutoScalingMinSize,ParameterValue=$AwsAutoScalingMinSize \
 ParameterKey=AwsDefaultVpcId,ParameterValue=$AwsDefaultVpcId \
-ParameterKey=AwsEbHealthReportingSystem,ParameterValue=$AwsEbHealthReportingSystem \
+ParameterKey=AwsEbHealthReportingSystem,ParameterValue=enhanced \
 ParameterKey=AwsKey,ParameterValue=$AwsKey \
 ParameterKey=AwsKeyConsents,ParameterValue=$AwsKeyConsents \
 ParameterKey=AwsKeyUpload,ParameterValue=$AwsKeyUpload \
@@ -61,7 +61,7 @@ ParameterKey=AwsSecretKeyUploadCms,ParameterValue=$AwsSecretKeyUploadCms \
 ParameterKey=AwsSnsNotificationEndpoint,ParameterValue=$AwsSnsNotificationEndpoint \
 ParameterKey=BridgeEnv,ParameterValue=$BridgeEnv \
 ParameterKey=BridgeHealthcodeRedisKey,ParameterValue=$BridgeHealthcodeRedisKey \
-ParameterKey=BridgeUser,ParameterValue=$BridgeUser \
+ParameterKey=BridgeUser,ParameterValue=heroku \
 ParameterKey=ConsentsBucket,ParameterValue=$ConsentsBucket \
 ParameterKey=DNSHostname,ParameterValue=$DNS_HOSTNAME \
 ParameterKey=DNSDomain,ParameterValue=$DNS_DOMAIN \
@@ -90,21 +90,11 @@ ParameterKey=WebservicesUrl,ParameterValue=$WebservicesUrl
 # CF does not support SecureString, update with AWS CLI instead.
 # !!Important!! - this only adds, it does not cleanup.  Make sure to cleanup using the AWS console or CLI (delete-parameter command)
 export KMS_KEY_ID="alias/$STACK_NAME/KmsKey"
-aws ssm put-parameter --name "/$STACK_NAME/AWS_KEY" --value $AwsKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_KEY_CONSENTS" --value $AwsKeyConsents --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_KEY_UPLOAD" --value $AwsKeyUpload --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_KEY_UPLOAD_CMS" --value $AwsKeyUploadCms --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_SECRET_KEY" --value $AwsSecretKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_SECRET_KEY_CONSENTS" --value $AwsSecretKeyConsents --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_SECRET_KEY_UPLOAD" --value $AwsSecretKeyUpload --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/AWS_SECRET_KEY_UPLOAD_CMS" --value $AwsSecretKeyUploadCms --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/BRIDGE_HEALTHCODE_REDIS_KEY" --value $BridgeHealthcodeRedisKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/EMAIL_UNSUBSCRIBE_TOKEN" --value $EmailUnsubscribeToken --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_PASSWORD" --value $HibernateConnectionPassword --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_URL" --value $HibernateConnectionUrl --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USERNAME" --value $HibernateConnectionUsername --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USESSL" --value $HibernateConnectionUsessl --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/SNS_KEY" --value $SnsKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/SNS_SECRET_KEY" --value $SnsSecretKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_API_KEY" --value $SynapseApiKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_USER" --value $SynapseUser --type "SecureString" --key-id $KMS_KEY_ID --overwrite
