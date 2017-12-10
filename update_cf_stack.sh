@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+TEMPLATE_URL=$1
+
 # double interpolate vars from travis
 eval export "AppDeployBucket=\$AppDeployBucket_$TRAVIS_BRANCH"
 eval export "AttachmentBucket=\$AttachmentBucket_$TRAVIS_BRANCH"
@@ -37,7 +39,7 @@ eval export "WebservicesUrl=\$WebservicesUrl_$TRAVIS_BRANCH"
 aws cloudformation update-stack \
 --stack-name $STACK_NAME \
 --capabilities CAPABILITY_NAMED_IAM \
---template-body file://cf_templates/eb_bridgepf.yml \
+--template-url $TEMPLATE_URL \
 --parameters \
 ParameterKey=AppDeployBucket,ParameterValue=$AppDeployBucket \
 ParameterKey=AppHealthcheckUrl,ParameterValue='HTTP:80/?study=api' \
