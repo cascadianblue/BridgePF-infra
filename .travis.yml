@@ -19,6 +19,7 @@ install:
 - /tmp/git-crypt-master/git-crypt unlock ./git-crypt.key
 - rm -rf git-crypt.key
 - source env_vars && source env_vars.secret
+- source ./normalize_vars.sh
 - /tmp/git-crypt-master/git-crypt lock
 - ./setup_aws_cli.sh
 script:

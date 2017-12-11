@@ -2,40 +2,6 @@
 
 TEMPLATE_URL=$1
 
-# double interpolate vars from travis
-eval export "AppDeployBucket=\$AppDeployBucket_$TRAVIS_BRANCH"
-eval export "AttachmentBucket=\$AttachmentBucket_$TRAVIS_BRANCH"
-eval export "AwsAutoScalingGroupName=\$AwsAutoScalingGroupName_$TRAVIS_BRANCH"
-eval export "AwsAutoScalingMaxSize=\$AwsAutoScalingMaxSize_$TRAVIS_BRANCH"
-eval export "AwsAutoScalingMinSize=\$AwsAutoScalingMinSize_$TRAVIS_BRANCH"
-eval export "AwsKeyUpload=\$AwsKeyUpload_$TRAVIS_BRANCH"
-eval export "AwsKeyConsents=\$AwsKeyConsents_$TRAVIS_BRANCH"
-eval export "AwsKeyUploadCms=\$AwsKeyUploadCms_$TRAVIS_BRANCH"
-eval export "AwsLoadBalancerName=\$AwsLoadBalancerName_$TRAVIS_BRANCH"
-eval export "AwsSecretKeyConsents=\$AwsSecretKeyConsents_$TRAVIS_BRANCH"
-eval export "AwsSecretKeyUpload=\$AwsSecretKeyUpload_$TRAVIS_BRANCH"
-eval export "AwsSecretKeyUploadCms=\$AwsSecretKeyUploadCms_$TRAVIS_BRANCH"
-eval export "AwsSnsNotificationEndpoint=\$AwsSnsNotificationEndpoint_$TRAVIS_BRANCH"
-eval export "BridgeEnv=\$BridgeEnv_$TRAVIS_BRANCH"
-eval export "BridgeHealthcodeRedisKey=\$BridgeHealthcodeRedisKey_$TRAVIS_BRANCH"
-eval export "ConsentsBucket=\$ConsentsBucket_$TRAVIS_BRANCH"
-eval export "EmailUnsubscribeToken=\$EmailUnsubscribeToken_$TRAVIS_BRANCH"
-eval export "HibernateConnectionPassword=\$HibernateConnectionPassword_$TRAVIS_BRANCH"
-eval export "HibernateConnectionUrl=\$HibernateConnectionUrl_$TRAVIS_BRANCH"
-eval export "HibernateConnectionUsername=\$HibernateConnectionUsername_$TRAVIS_BRANCH"
-eval export "HostPostfix=\$HostPostfix_$TRAVIS_BRANCH"
-eval export "SnsKey=\$SnsKey_$TRAVIS_BRANCH"
-eval export "SnsSecretKey=\$SnsSecretKey_$TRAVIS_BRANCH"
-eval export "SSLCertArn=\$SSLCertArn_$TRAVIS_BRANCH"
-eval export "SynapseApiKey=\$SynapseApiKey_$TRAVIS_BRANCH"
-eval export "SynapseUser=\$SynapseUser_$TRAVIS_BRANCH"
-eval export "SysopsEmail=\$SysopsEmail_$TRAVIS_BRANCH"
-eval export "UploadBucket=\$UploadBucket_$TRAVIS_BRANCH"
-eval export "UploadCmsCertBucket=\$UploadCmsCertBucket_$TRAVIS_BRANCH"
-eval export "UploadCmsPrivBucket=\$UploadCmsPrivBucket_$TRAVIS_BRANCH"
-eval export "WebservicesUrl=\$WebservicesUrl_$TRAVIS_BRANCH"
-
-# deploy with evaluated vars
 aws cloudformation update-stack \
 --stack-name $STACK_NAME \
 --capabilities CAPABILITY_NAMED_IAM \
@@ -88,15 +54,3 @@ ParameterKey=UploadBucket,ParameterValue=$UploadBucket \
 ParameterKey=UploadCmsCertBucket,ParameterValue=$UploadCmsCertBucket \
 ParameterKey=UploadCmsPrivBucket,ParameterValue=$UploadCmsPrivBucket \
 ParameterKey=WebservicesUrl,ParameterValue=$WebservicesUrl
-
-# CF does not support SecureString, update with AWS CLI instead.
-# !!Important!! - this only adds, it does not cleanup.  Make sure to cleanup using the AWS console or CLI (delete-parameter command)
-export KMS_KEY_ID="alias/$STACK_NAME/KmsKey"
-aws ssm put-parameter --name "/$STACK_NAME/BRIDGE_HEALTHCODE_REDIS_KEY" --value $BridgeHealthcodeRedisKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/EMAIL_UNSUBSCRIBE_TOKEN" --value $EmailUnsubscribeToken --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_PASSWORD" --value $HibernateConnectionPassword --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_URL" --value $HibernateConnectionUrl --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USERNAME" --value $HibernateConnectionUsername --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USESSL" --value $HibernateConnectionUsessl --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_API_KEY" --value $SynapseApiKey --type "SecureString" --key-id $KMS_KEY_ID --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_USER" --value $SynapseUser --type "SecureString" --key-id $KMS_KEY_ID --overwrite
