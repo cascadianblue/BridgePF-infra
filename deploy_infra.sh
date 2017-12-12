@@ -11,16 +11,19 @@ echo -e "\nValidating CF template $TEMPLATE_URL"
 aws cloudformation validate-template --template-url $TEMPLATE_URL
 
 echo -e "\nDeploying CF template $TEMPLATE_URL"
-# Handle message that shouldn't be an error, https://github.com/hashicorp/terraform/issues/5653
 UPDATE_CMD="./update_cf_stack.sh $TEMPLATE_URL"
 message=$($UPDATE_CMD 2>&1 1>/dev/null)
 error_code=$(echo $?)
 if [[ $error_code -ne 0 && $message =~ .*"No updates are to be performed".* ]]; then
+  # Handle message that shouldn't be an error, https://github.com/hashicorp/terraform/issues/5653
   echo -e "\nNo stack changes detected. An update is not required."
   error_code=0
-else
+elif [[ $error_code -ne 0 ]]; then
+  # real errors
   echo $message
+  exit $error_code
 fi
 
 echo -e "\nUpdating Systems Manager Parameter Store..."
 ./update_ssm.sh 2>&1 1>/dev/null
+exit $?
