@@ -8,6 +8,5 @@ aws ssm put-parameter --name "/$STACK_NAME/EMAIL_UNSUBSCRIBE_TOKEN" --value "$Em
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_PASSWORD" --value "$HibernateConnectionPassword" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_URL" --value "$HibernateConnectionUrl" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USERNAME" --value "$HibernateConnectionUsername" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
-aws ssm put-parameter --name "/$STACK_NAME/HIBERNATE_CONNECTION_USESSL" --value "$HibernateConnectionUsessl" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_API_KEY" --value "$SynapseApiKey" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
 aws ssm put-parameter --name "/$STACK_NAME/SYNAPSE_USER" --value "$SynapseUser" --type "SecureString" --key-id "$KMS_KEY_ID" --overwrite
