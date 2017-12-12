@@ -121,12 +121,6 @@ Parameters:
     Type: String
     Description: The AWS EB health check path
     Default: param_place_holder
-  AuthCreateMysqlAccounts:
-    Type: String
-    Default: param_place_holder
-  AuthProvider:
-    Type: String
-    Default: param_place_holder
   AwsAutoScalingGroupName:
     Type: String
     Default: param_place_holder
@@ -451,12 +445,6 @@ Resources:
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: APP_DEPLOY_BUCKET
           Value: !Ref AppDeployBucket
-        - Namespace: 'aws:elasticbeanstalk:application:environment'
-          OptionName: AUTH_CREATE_MYSQL_ACCOUNTS
-          Value: !Ref AuthCreateMysqlAccounts
-        - Namespace: 'aws:elasticbeanstalk:application:environment'
-          OptionName: AUTH_PROVIDER
-          Value: !Ref AuthProvider
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: AWS_KEY
           Value: !Ref AwsKey
