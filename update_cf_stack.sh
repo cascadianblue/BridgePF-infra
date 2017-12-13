@@ -10,8 +10,6 @@ aws cloudformation update-stack \
 ParameterKey=AppDeployBucket,ParameterValue=$AppDeployBucket \
 ParameterKey=AppHealthcheckUrl,ParameterValue='HTTP:80/?study=api' \
 ParameterKey=AttachmentBucket,ParameterValue=$AttachmentBucket \
-ParameterKey=AuthCreateMysqlAccounts,ParameterValue=true \
-ParameterKey=AuthProvider,ParameterValue=mysql \
 ParameterKey=AwsAutoScalingGroupName,ParameterValue=$AwsAutoScalingGroupName \
 ParameterKey=AwsAutoScalingMaxSize,ParameterValue=$AwsAutoScalingMaxSize \
 ParameterKey=AwsAutoScalingMinSize,ParameterValue=$AwsAutoScalingMinSize \
