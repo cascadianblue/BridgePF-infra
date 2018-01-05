@@ -628,6 +628,14 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier'
+        - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+        - !Ref IAMBridgepfS3ManagedPolicy
+        - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonSESFullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonRDSFullAccess'
+        - !Ref IAMBridgepfECManagedPolicy
+        - !Ref IAMBridgepfSQSManagedPolicy
   AWSIAMInstanceProfile:
     Type: 'AWS::IAM::InstanceProfile'
     Properties:
@@ -1214,6 +1222,11 @@ Resources:
                 - ''
                 - - 'arn:aws:s3:::'
                   - !Ref ConsentsBucket
+              - !Join
+                - ''
+                - - 'arn:aws:s3:::'
+                  - 'docs'
+                  - !Ref HostPostfix
           - Sid: ModAccess
             Action:
               - 's3:PutObject'
@@ -1247,6 +1260,12 @@ Resources:
                 - ''
                 - - 'arn:aws:s3:::'
                   - !Ref ConsentsBucket
+                  - /*
+              - !Join
+                - ''
+                - - 'arn:aws:s3:::'
+                  - 'docs'
+                  - !Ref HostPostfix
                   - /*
   # special policy for developer testing
   IAMBridgepfLocalS3ManagedPolicy:
