@@ -1090,11 +1090,11 @@ Resources:
       CacheSecurityGroupNames:
         - !Ref AWSECacheSecurityGroup
   AWSRdsSecurityGroup:
-    Type: 'AWS::RDS::SecurityGroup'
+    Type: 'AWS::RDS::DBSecurityGroup'
     Properties:
       Description: RDS Security Group
   AWSRdsSecurityGroupIngress:
-    Type: 'AWS::RDS::SecurityGroupIngress'
+    Type: 'AWS::RDS::DBSecurityGroupIngress'
     Properties:
       DBSecurityGroupName: !Ref AWSRdsSecurityGroup
       EC2SecurityGroupName: !Join
