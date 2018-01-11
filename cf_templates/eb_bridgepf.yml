@@ -1089,6 +1089,21 @@ Resources:
       NumCacheNodes: '1'
       CacheSecurityGroupNames:
         - !Ref AWSECacheSecurityGroup
+  AWSRdsSecurityGroup:
+    Type: 'AWS::RDS::SecurityGroup'
+    Properties:
+      Description: RDS Security Group
+  AWSRdsSecurityGroupIngress:
+    Type: 'AWS::RDS::SecurityGroupIngress'
+    Properties:
+      DBSecurityGroupName: !Ref AWSRdsSecurityGroup
+      EC2SecurityGroupName: !Join
+        - '-'
+        - - !Ref 'AWS::StackName'
+          - AWSEC2SecurityGroup
+      EC2SecurityGroupOwnerId: !Ref 'AWS::AccountId'
+      # allow access from fred hutch VPN
+      CIDRIP: !ImportValue bridge-FhcrcVpnCidrip
   AWSCWDashboard:
     Type: 'AWS::CloudWatch::Dashboard'
     Properties:
