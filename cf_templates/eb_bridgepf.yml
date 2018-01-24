@@ -1089,20 +1089,24 @@ Resources:
       NumCacheNodes: '1'
       CacheSecurityGroupNames:
         - !Ref AWSECacheSecurityGroup
-  AWSRdsSecurityGroup:
-    Type: 'AWS::RDS::DBSecurityGroup'
+  AWSEC2RdsSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    DependsOn: AWSEC2SecurityGroup
     Properties:
-      GroupDescription: RDS Security Group
-      DBSecurityGroupIngress:
-        -
-          EC2SecurityGroupId: !GetAtt AWSEC2SecurityGroup.GroupId
-          EC2SecurityGroupOwnerId: !Ref 'AWS::AccountId'
-  AWSRdsSecurityGroupIngress:
-    Type: 'AWS::RDS::DBSecurityGroupIngress'
-    Properties:
-      DBSecurityGroupName: !Ref AWSRdsSecurityGroup
-      # allow access from fred hutch VPN
-      CIDRIP: !ImportValue bridge-FhcrcVpnCidrip
+      GroupDescription: !Join
+        - '-'
+        - - !Ref 'AWS::StackName'
+          - AWSEC2RdsSecurityGroup
+      VpcId: !Ref AwsDefaultVpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '3306'
+          ToPort: '3306'
+          SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
+        - CidrIp: !ImportValue bridge-FhcrcVpnCidrip
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
   AWSCWDashboard:
     Type: 'AWS::CloudWatch::Dashboard'
     Properties:
