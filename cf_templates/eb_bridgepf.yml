@@ -1107,6 +1107,23 @@ Resources:
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
+        # Tests running on travis requires access to RDS, https://docs.travis-ci.com/user/ip-addresses/
+        - CidrIp: '52.3.55.28'
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
+        - CidrIp: '34.233.56.198'
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
+        - CidrIp: '52.54.31.11'
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
+        - CidrIp: '52.45.185.117'
+          FromPort: '3306'
+          ToPort: '3306'
+          IpProtocol: tcp
   AWSCWDashboard:
     Type: 'AWS::CloudWatch::Dashboard'
     Properties:
