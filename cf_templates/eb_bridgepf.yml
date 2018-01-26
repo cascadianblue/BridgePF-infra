@@ -1108,19 +1108,19 @@ Resources:
           ToPort: '3306'
           IpProtocol: tcp
         # Tests running on travis requires access to RDS, https://docs.travis-ci.com/user/ip-addresses/
-        - CidrIp: '52.3.55.28'
+        - CidrIp: '52.3.55.28/32'
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
-        - CidrIp: '34.233.56.198'
+        - CidrIp: '34.233.56.198/32'
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
-        - CidrIp: '52.54.31.11'
+        - CidrIp: '52.54.31.11/32'
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
-        - CidrIp: '52.45.185.117'
+        - CidrIp: '52.45.185.117/32'
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
