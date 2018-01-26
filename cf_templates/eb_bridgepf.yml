@@ -1107,20 +1107,19 @@ Resources:
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
-        # Tests running on travis requires access to RDS, https://docs.travis-ci.com/user/ip-addresses/
-        - CidrIp: '52.3.55.28/32'
-          FromPort: '3306'
-          ToPort: '3306'
-          IpProtocol: tcp
-        - CidrIp: '34.233.56.198/32'
-          FromPort: '3306'
-          ToPort: '3306'
-          IpProtocol: tcp
-        - CidrIp: '52.54.31.11/32'
-          FromPort: '3306'
-          ToPort: '3306'
-          IpProtocol: tcp
-        - CidrIp: '52.45.185.117/32'
+  # Tests running on travis requires direct access to RDS (should only apply to Dev RDS instance)
+  # https://docs.travis-ci.com/user/ip-addresses/
+  AWSEC2RdsOpenSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    DependsOn: AWSEC2SecurityGroup
+    Properties:
+      GroupDescription: !Join
+        - '-'
+        - - !Ref 'AWS::StackName'
+          - AWSEC2RdsOpenSecurityGroup
+      VpcId: !Ref AwsDefaultVpcId
+      SecurityGroupIngress:
+        - CidrIp: '0.0.0.0/0'
           FromPort: '3306'
           ToPort: '3306'
           IpProtocol: tcp
