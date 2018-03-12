@@ -856,7 +856,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{ ($.status = 400) && ($.study != "*blood-pressure") }'
+      FilterPattern: '{ $.status = 400 }'
       MetricTransformations:
         -
           MetricValue: "1"
@@ -961,7 +961,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{( $.status = 412 ) && ( $.uri != "*/signIn*" ) && ( $.uri != "*/verifyEmail*" ) && ($.study != "*blood-pressure")}'
+      FilterPattern: '{( $.status = 412 ) && ( $.uri != "*/signIn*" ) && ( $.uri != "*/verifyEmail*" ) }'
       MetricTransformations:
         -
           MetricValue: "1"
