@@ -1103,6 +1103,10 @@ Resources:
           FromPort: '3306'
           ToPort: '3306'
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
+        - IpProtocol: tcp
+          FromPort: '3306'
+          ToPort: '3306'
+          SourceSecurityGroupId: !ImportValue bridge-VpnSecurityGroup
         - CidrIp: !ImportValue bridge-FhcrcVpnCidrip
           FromPort: '3306'
           ToPort: '3306'
