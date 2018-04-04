@@ -1103,10 +1103,6 @@ Resources:
           FromPort: '3306'
           ToPort: '3306'
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
-        - CidrIp: !ImportValue bridge-FhcrcVpnCidrip
-          FromPort: '3306'
-          ToPort: '3306'
-          IpProtocol: tcp
   # Tests running on travis requires direct access to RDS (should only apply to Dev RDS instance)
   # https://docs.travis-ci.com/user/ip-addresses/
   AWSEC2RdsOpenSecurityGroup:
