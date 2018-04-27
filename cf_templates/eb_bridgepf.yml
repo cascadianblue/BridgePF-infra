@@ -1475,3 +1475,8 @@ Resources:
           - !Ref AWS::StackName
           - '/KmsKey'
       TargetKeyId: !Ref AWSKmsKey
+  # Buckets for signed consents that users can download
+  AWSS3AppDeployBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub 'org-sagebridge-usersigned-consents-${AWS::StackName}'
