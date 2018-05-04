@@ -113,6 +113,10 @@ Outputs:
     Value: !Ref UploadCmsPrivBucket
     Export:
       Name: !Sub '${AWS::StackName}-UploadCmsPrivBucket'
+  AWSS3UserSignedConsentsBucket:
+    Value: !Ref AWSS3UserSignedConsentsBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-UserSignedConsentsBucket'
 Parameters:
   AppDeployBucket:
     Type: String
@@ -1476,7 +1480,7 @@ Resources:
           - '/KmsKey'
       TargetKeyId: !Ref AWSKmsKey
   # Buckets for signed consents that users can download
-  AWSS3AppDeployBucket:
+  AWSS3UserSignedConsentsBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Sub 'org-sagebridge-usersigned-consents-${AWS::StackName}'
