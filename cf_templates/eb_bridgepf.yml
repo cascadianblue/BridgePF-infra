@@ -1483,4 +1483,4 @@ Resources:
   AWSS3UserSignedConsentsBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub 'org-sagebridge-usersigned-consents-${AWS::StackName}'
+      BucketName: !Sub '${BridgeEnv}.usersigned.consents.bucket'
