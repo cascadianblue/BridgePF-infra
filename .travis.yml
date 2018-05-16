@@ -1,26 +1,23 @@
 sudo: false
 language: python
-python: 3.4
+python: 3.5
 cache: pip
+fast_finish: true
 branches:
   only:
   - develop
   - uat
   - prod
-env:
-  global:
-    - STACK_NAME=bridgepf-$TRAVIS_BRANCH
-    - DNS_HOSTNAME=$STACK_NAME
-    - DNS_DOMAIN=sagebridge.org
-
 install:
 - ./setup_git_crypt.sh
 - openssl aes-256-cbc -K $encrypted_ff3a2f371f92_key -iv $encrypted_ff3a2f371f92_iv -in git-crypt.key.enc -out git-crypt.key -d
 - /tmp/git-crypt-master/git-crypt unlock ./git-crypt.key
 - rm -rf git-crypt.key
 - source env_vars && source env_vars.secret
-- source ./normalize_vars.sh
 - /tmp/git-crypt-master/git-crypt lock
 - ./setup_aws_cli.sh
+- pip install sceptre
 script:
-- ./deploy_infra.sh
+- ./validate-templates.sh || travis_terminate 1
+- ./update_ssm.sh || travis_terminate 1
+- sceptre --var "profile=default" --var "region=us-east-1" launch-env $TRAVIS_BRANCH

@@ -1,4 +1,8 @@
 # environment variables for Sage-Bionetworks/BridgePF-infra
+export BridgeInfraCfBucket_develop=bridge-cloudformation-artifacts-649232250620
+export BridgeInfraCfBucket_uat=bridge-cloudformation-artifacts-649232250620
+export BridgeInfraCfBucket_prod=bridge-cloudformation-artifacts-649232250620
+
 export AppDeployBucket_develop=org-sagebridge-bridgepf-deployment-bridgepf-develop
 export AppDeployBucket_prod=org-sagebridge-bridgepf-deployment-bridgepf-prod
 export AppDeployBucket_uat=org-sagebridge-bridgepf-deployment-bridgepf-uat
@@ -14,7 +18,9 @@ export AwsAutoScalingMaxSize_uat=3
 export AwsAutoScalingMinSize_develop=1
 export AwsAutoScalingMinSize_prod=3
 export AwsAutoScalingMinSize_uat=2
-export AwsDefaultVpcId=vpc-9c70bbf9
+export AwsDefaultVpcId_develop=vpc-9c70bbf9
+export AwsDefaultVpcId_prod=vpc-9c70bbf9
+export AwsDefaultVpcId_uat=vpc-9c70bbf9
 export AwsLoadBalancerName_develop=awseb-e-2-AWSEBLoa-1W8N412DA6G28
 export AwsLoadBalancerName_prod=awseb-e-6-AWSEBLoa-15W6EU8CCBK5W
 export AwsLoadBalancerName_uat=awseb-e-h-AWSEBLoa-AY706DQW6GKJ

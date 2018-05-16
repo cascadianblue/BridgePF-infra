@@ -3,26 +3,19 @@ Install and configure the AWS Infrastructure for the BridgePF application.
 
 
 ## Initialize a new stack
-1. Deploy the infrastrture to AWS.  The stack-name parameter should be $STACK_NAME-$ENVIRONMENT (example: foo-develop).
+1. Deploy the infrastructure to AWS.  The stack-name parameter should be $STACK_NAME-$ENVIRONMENT (example: bridgepf-develop).
 
 ```
-aws --profile aws-admin --region us-east-1 cloudformation create-stack \
-  --stack-name foo-develop \
-  --capabilities CAPABILITY_NAMED_IAM \
-  --template-body cf_templates/eb_bridgepf.yml \
-  --parameters \
-  ParameterKey=AppDeployBucket,ParameterValue=org-sagebridge-bridgepf-deployment-foo-develop \
-  ParameterKey=AwsDefaultVpcId,ParameterValue=vpc-1d69caf3 \
-  ParameterKey=EC2InstanceType,ParameterValue=t2.micro \
-  ..
-  .. [Rest of the parameters from update_cf_stack.sh]
-
+pip install sceptre
+export TRAVIS_BRANCH=develop
+source env_vars && source env_vars.secret
+sceptre --var "profile=bridge.prod.travis" --var "region=us-east-1" launch-env develop
 ```
 
 The above should create the infrastructure required for BridgePF, it does not actually deploy the app it only installs
 and configures the required AWS infrastructure for it.  The AWS appilcation health check is enabled therefore the EB
 environment will start in an error state since the app has not been deployed.  The environment status should turn
-green once the is successfully deployed.
+green once the app is successfully deployed.
 
 2. Check for additional bootstrapping steps in BridgePF repo[1]
 

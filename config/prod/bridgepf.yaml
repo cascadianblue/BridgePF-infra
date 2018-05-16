@@ -1,0 +1,48 @@
+template_path: templates/eb_bridgepf.yaml
+stack_name: bridgepf-develop
+parameters:
+  AppDeployBucket: {{ environment_variable.AppDeployBucket_prod }}
+  AppHealthcheckUrl: 'HTTP:80/?study=api'
+  AttachmentBucket: {{ environment_variable.AttachmentBucket_prod }}
+  AwsAutoScalingGroupName: {{ environment_variable.AwsAutoScalingGroupName_prod }}
+  AwsAutoScalingMaxSize: "{{ environment_variable.AwsAutoScalingMaxSize_prod }}"
+  AwsAutoScalingMinSize: "{{ environment_variable.AwsAutoScalingMinSize_prod }}"
+  AwsDefaultVpcId: {{ environment_variable.AwsDefaultVpcId_prod }}
+  AwsEbHealthReportingSystem: enhanced
+  AwsKey: {{ environment_variable.AwsKey_prod }}
+  AwsKeyConsents: {{ environment_variable.AwsKeyConsents_prod }}
+  AwsKeyUpload: {{ environment_variable.AwsKeyUpload_prod }}
+  AwsKeyUploadCms: {{ environment_variable.AwsKeyUploadCms_prod }}
+  AwsLoadBalancerName: {{ environment_variable.AwsLoadBalancerName_prod }}
+  AwsSecretKey: {{ environment_variable.AwsSecretKey_prod }}
+  AwsSecretKeyConsents: {{ environment_variable.AwsSecretKeyConsents_prod }}
+  AwsSecretKeyUpload: {{ environment_variable.AwsSecretKeyUpload_prod }}
+  AwsSecretKeyUploadCms: {{ environment_variable.AwsSecretKeyUploadCms_prod }}
+  AwsSnsNotificationEndpoint: {{ environment_variable.AwsSnsNotificationEndpoint_prod }}
+  BridgeEnv: {{ environment_variable.BridgeEnv_prod }}
+  BridgeHealthcodeRedisKey: {{ environment_variable.BridgeHealthcodeRedisKey_prod }}
+  BridgeUser: heroku
+  ConsentsBucket: {{ environment_variable.ConsentsBucket_prod }}
+  DNSHostname: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
+  DNSDomain: sagebridge.org
+  EC2InstanceType: t2.small
+  ElastiCacheInstanceType:  cache.t2.micro
+  EmailUnsubscribeToken: {{ environment_variable.EmailUnsubscribeToken_prod }}
+  HibernateConnectionPassword: {{ environment_variable.HibernateConnectionPassword_prod }}
+  HibernateConnectionUrl: {{ environment_variable.HibernateConnectionUrl_prod }}
+  HibernateConnectionUsername: {{ environment_variable.HibernateConnectionUsername_prod }}
+  HibernateConnectionUsessl: "True"
+  HostPostfix: {{ environment_variable.HostPostfix_prod }}
+  JavaOpts: '-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar'
+  NewRelicAppName: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
+  NewRelicLicenseKey: {{ environment_variable.NewRelicLicenseKey }}
+  SnsKey: {{ environment_variable.SnsKey_prod }}
+  SnsSecretKey: {{ environment_variable.SnsSecretKey_prod }}
+  SSLCertArn: {{ environment_variable.SSLCertArn_prod }}
+  SynapseApiKey: {{ environment_variable.SynapseApiKey_prod }}
+  SynapseUser: {{ environment_variable.SynapseUser_prod }}
+  SysopsEmail: {{ environment_variable.SysopsEmail_prod }}
+  UploadBucket: {{ environment_variable.UploadBucket_prod }}
+  UploadCmsCertBucket: {{ environment_variable.UploadCmsCertBucket_prod }}
+  UploadCmsPrivBucket: {{ environment_variable.UploadCmsPrivBucket_prod }}
+  WebservicesUrl: {{ environment_variable.WebservicesUrl_prod }}
