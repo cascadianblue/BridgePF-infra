@@ -1,5 +1,5 @@
 template_path: templates/eb_bridgepf.yaml
-stack_name: bridgepf-develop
+stack_name: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
 parameters:
   AppDeployBucket: {{ environment_variable.AppDeployBucket_develop }}
   AppHealthcheckUrl: 'HTTP:80/?study=api'
