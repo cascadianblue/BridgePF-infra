@@ -1094,13 +1094,13 @@ Resources:
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
   AWSECCacheCluster:    # deprecated, replaced with VPC based AWSElastiCacheCluster
     Type: 'AWS::ElastiCache::CacheCluster'
-    DependsOn: AWSElastiCacheSecurityGroup
+    DependsOn: AWSECacheSecurityGroup
     Properties:
       Engine: redis
       CacheNodeType: !Ref ElastiCacheInstanceType
       NumCacheNodes: '1'
       CacheSecurityGroupNames:
-        - !Ref AWSElastiCacheSecurityGroup
+        - !Ref AWSECacheSecurityGroup
   AWSECCacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
     Properties:
