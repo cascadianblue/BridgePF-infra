@@ -45,4 +45,5 @@ parameters:
   UploadBucket: {{ environment_variable.UploadBucket_develop }}
   UploadCmsCertBucket: {{ environment_variable.UploadCmsCertBucket_develop }}
   UploadCmsPrivBucket: {{ environment_variable.UploadCmsPrivBucket_develop }}
+  VpcSubnetIds: subnet-2ec6ee06, subnet-e2197187, subnet-3a47a84d, subnet-9095259c, subnet-133c3455, subnet-42b1d178
   WebservicesUrl: {{ environment_variable.WebservicesUrl_develop }}
