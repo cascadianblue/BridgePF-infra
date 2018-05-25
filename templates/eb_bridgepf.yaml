@@ -113,10 +113,6 @@ Outputs:
     Value: !Ref UploadCmsPrivBucket
     Export:
       Name: !Sub '${AWS::StackName}-UploadCmsPrivBucket'
-  AWSS3UserSignedConsentsBucket:  # deprecated, replaced with AWSS3UserSignedConsentsDownloadBucket
-    Value: !Ref AWSS3UserSignedConsentsBucket
-    Export:
-      Name: !Sub '${AWS::StackName}-UserSignedConsentsBucket'
   AWSS3UserSignedConsentsDownloadBucket:
     Value: !Ref AWSS3UserSignedConsentsDownloadBucket
     Export:
@@ -1498,10 +1494,6 @@ Resources:
           - '/KmsKey'
       TargetKeyId: !Ref AWSKmsKey
   # Buckets for signed consents that users can download
-  AWSS3UserSignedConsentsBucket:  # deprecated, replaced with AWSS3UsersSignedConsentsDownloadBucket
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      BucketName: !Sub '${BridgeEnv}.usersigned.consents.bucket'
   AWSS3UserSignedConsentsDownloadBucket:
     Type: 'AWS::S3::Bucket'
 
