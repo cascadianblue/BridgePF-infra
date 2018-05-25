@@ -1075,10 +1075,6 @@ Resources:
           FromPort: '80'
           ToPort: '80'
           SourceSecurityGroupId: !Ref AWSLBSecurityGroup
-  AWSECacheSecurityGroup:   # deprecated, replaced with VPC based AWSElastiCacheSecurityGroup
-    Type: 'AWS::ElastiCache::SecurityGroup'
-    Properties:
-      Description: ElastiCache Security Group
   AWSElastiCacheSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -1092,15 +1088,6 @@ Resources:
           FromPort : '6379'
           ToPort : '6379'
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
-  AWSECCacheCluster:    # deprecated, replaced with VPC based AWSElastiCacheCluster
-    Type: 'AWS::ElastiCache::CacheCluster'
-    DependsOn: AWSECacheSecurityGroup
-    Properties:
-      Engine: redis
-      CacheNodeType: !Ref ElastiCacheInstanceType
-      NumCacheNodes: '1'
-      CacheSecurityGroupNames:
-        - !Ref AWSECacheSecurityGroup
   AWSECCacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
     Properties:
