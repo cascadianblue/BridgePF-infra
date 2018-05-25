@@ -20,4 +20,4 @@ install:
 script:
 - ./validate-templates.sh || travis_terminate 1
 - ./update_ssm.sh || travis_terminate 1
-- travis_wait 30 sceptre --var "profile=default" --var "region=us-east-1" launch-env $TRAVIS_BRANCH
+- travis_wait 45 sceptre --var "profile=default" --var "region=us-east-1" launch-env $TRAVIS_BRANCH
