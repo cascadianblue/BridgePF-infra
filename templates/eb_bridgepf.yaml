@@ -1517,5 +1517,4 @@ Resources:
       BucketName: !Sub '${BridgeEnv}.usersigned.consents.bucket'
   AWSS3UserSignedConsentsDownloadBucket:
     Type: 'AWS::S3::Bucket'
-    DeletionPolicy: Retain
 
