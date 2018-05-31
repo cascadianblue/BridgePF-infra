@@ -18,6 +18,7 @@ parameters:
   AwsSecretKeyConsents: {{ environment_variable.AwsSecretKeyConsents_develop }}
   AwsSecretKeyUpload: {{ environment_variable.AwsSecretKeyUpload_develop }}
   AwsSecretKeyUploadCms: {{ environment_variable.AwsSecretKeyUploadCms_develop }}
+  AwsSnsBounceNotificationEndpoint: bridgepf-develop-bounce-notifications@sagebase.org
   AwsSnsNotificationEndpoint: {{ environment_variable.AwsSnsNotificationEndpoint_develop }}
   BridgeEnv: {{ environment_variable.BridgeEnv_develop }}
   BridgeHealthcodeRedisKey: {{ environment_variable.BridgeHealthcodeRedisKey_develop }}

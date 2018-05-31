@@ -145,11 +145,13 @@ Parameters:
   AwsEbHealthReportingSystem:
     Type: String
     Default: param_place_holder
+  AwsSnsBounceNotificationEndpoint:
+    Type: String
+    Description: Email address for SNS bounce notifications
   AwsSnsNotificationEndpoint:
     Type: String
     Description: Email address for AWS SNS notifications
     Default: param_place_holder
-    NoEcho: true
   AwsKey:
     Type: String
     Default: param_place_holder
@@ -538,7 +540,7 @@ Resources:
           Value: !Ref NewRelicLicenseKey
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: SES_NOTIFICATION_TOPIC_ARN
-          Value: !Ref AWSSNSTopic
+          Value: !Ref AWSSNSBounceTopic
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: SNS_KEY
           Value: !Ref SnsKey
@@ -662,6 +664,13 @@ Resources:
       Path: /
       Roles:
         - !Ref AWSIAMRole
+  AWSSNSBounceTopic:
+    Type: "AWS::SNS::Topic"
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref AwsSnsBounceNotificationEndpoint
+          Protocol: "email"
   AWSSNSTopic:
     Type: "AWS::SNS::Topic"
     Properties:
