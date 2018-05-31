@@ -25,6 +25,7 @@ parameters:
   ConsentsBucket: {{ environment_variable.ConsentsBucket_develop }}
   DNSHostname: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
   DNSDomain: sagebridge.org
+  Domain: ws-develop.sagebridge.org
   EC2InstanceType: t2.small
   ElastiCacheInstanceType:  cache.t2.micro
   EmailUnsubscribeToken: {{ environment_variable.EmailUnsubscribeToken_develop }}
