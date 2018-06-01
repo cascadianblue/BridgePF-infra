@@ -145,11 +145,13 @@ Parameters:
   AwsEbHealthReportingSystem:
     Type: String
     Default: param_place_holder
+  AwsSnsBounceNotificationEndpoint:
+    Type: String
+    Description: Email address for SNS bounce notifications
   AwsSnsNotificationEndpoint:
     Type: String
     Description: Email address for AWS SNS notifications
     Default: param_place_holder
-    NoEcho: true
   AwsKey:
     Type: String
     Default: param_place_holder
@@ -204,6 +206,9 @@ Parameters:
     Type: String
     Description: DNS Hostname for deployment
     Default: param_place_holder
+  Domain:
+    Type: String
+    Description: The web service hostname
   EC2InstanceType:
     Type: String
     Description: Instance type to use for Elastic Beanstalk Instances
@@ -496,6 +501,9 @@ Resources:
           OptionName: BRIDGEPF_SERVICE_USER_SECRET_KEY
           Value: !GetAtt AWSIAMBridgepfServiceUserAccessKey.SecretAccessKey
         - Namespace: 'aws:elasticbeanstalk:application:environment'
+          OptionName: DOMAIN
+          Value: !Ref Domain
+        - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: EMAIL_UNSUBSCRIBE_TOKEN
           Value: !Ref EmailUnsubscribeToken
         - Namespace: 'aws:elasticbeanstalk:application:environment'
@@ -530,6 +538,9 @@ Resources:
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: NEW_RELIC_LICENSE_KEY
           Value: !Ref NewRelicLicenseKey
+        - Namespace: 'aws:elasticbeanstalk:application:environment'
+          OptionName: SES_NOTIFICATION_TOPIC_ARN
+          Value: !Ref AWSSNSBounceTopic
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: SNS_KEY
           Value: !Ref SnsKey
@@ -653,6 +664,13 @@ Resources:
       Path: /
       Roles:
         - !Ref AWSIAMRole
+  AWSSNSBounceTopic:
+    Type: "AWS::SNS::Topic"
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref AwsSnsBounceNotificationEndpoint
+          Protocol: "email"
   AWSSNSTopic:
     Type: "AWS::SNS::Topic"
     Properties:

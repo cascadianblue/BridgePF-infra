@@ -18,6 +18,7 @@ parameters:
   AwsSecretKeyConsents: {{ environment_variable.AwsSecretKeyConsents_uat }}
   AwsSecretKeyUpload: {{ environment_variable.AwsSecretKeyUpload_uat }}
   AwsSecretKeyUploadCms: {{ environment_variable.AwsSecretKeyUploadCms_uat }}
+  AwsSnsBounceNotificationEndpoint: bridgepf-uat-bounce-notifications@sagebase.org
   AwsSnsNotificationEndpoint: {{ environment_variable.AwsSnsNotificationEndpoint_uat }}
   BridgeEnv: {{ environment_variable.BridgeEnv_uat }}
   BridgeHealthcodeRedisKey: {{ environment_variable.BridgeHealthcodeRedisKey_uat }}
@@ -25,6 +26,7 @@ parameters:
   ConsentsBucket: {{ environment_variable.ConsentsBucket_uat }}
   DNSHostname: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
   DNSDomain: sagebridge.org
+  Domain: ws-staging.sagebridge.org
   EC2InstanceType: t2.small
   ElastiCacheInstanceType:  cache.t2.micro
   EmailUnsubscribeToken: {{ environment_variable.EmailUnsubscribeToken_uat }}
