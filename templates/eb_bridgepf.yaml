@@ -1468,7 +1468,7 @@ Resources:
                   - - 'arn:aws:iam::'
                     - !Ref AWS::AccountId
                     - ':user/'
-                    - !ImportValue bootstrap-TravisUser
+                    - bootstrap-AWSIAMTravisUser-E9DIXQE6ITK4
             Action:
               - "kms:Create*"
               - "kms:Describe*"
@@ -1493,7 +1493,7 @@ Resources:
                   - - 'arn:aws:iam::'
                     - !Ref AWS::AccountId
                     - ':user/'
-                    - !ImportValue bootstrap-TravisUser
+                    - bootstrap-AWSIAMTravisUser-E9DIXQE6ITK4
                 - !GetAtt AWSIAMBridgepfServiceUser.Arn
             Action:
               - "kms:Encrypt"
