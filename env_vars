@@ -1,7 +1,7 @@
 # environment variables for Sage-Bionetworks/BridgePF-infra
-export BridgeInfraCfBucket_develop=bridge-cloudformation-artifacts-649232250620
-export BridgeInfraCfBucket_uat=bridge-cloudformation-artifacts-649232250620
-export BridgeInfraCfBucket_prod=bridge-cloudformation-artifacts-649232250620
+export BridgeInfraCfBucket_develop=bootstrap-awss3cloudformationbucket-zov6lb1ge7ll
+export BridgeInfraCfBucket_uat=bootstrap-awss3cloudformationbucket-zov6lb1ge7ll
+export BridgeInfraCfBucket_prod=bootstrap-awss3cloudformationbucket-zov6lb1ge7ll
 
 export AppDeployBucket_develop=org-sagebridge-bridgepf-deployment-bridgepf-develop
 export AppDeployBucket_prod=org-sagebridge-bridgepf-deployment-bridgepf-prod
