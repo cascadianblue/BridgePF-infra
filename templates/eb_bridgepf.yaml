@@ -1463,12 +1463,7 @@ Resources:
             Effect: "Allow"
             Principal:
               AWS:
-                - !Join
-                  - ''
-                  - - 'arn:aws:iam::'
-                    - !Ref AWS::AccountId
-                    - ':user/'
-                    - !ImportValue us-east-1-bootstrap-TravisUser
+                - !ImportValue us-east-1-bootstrap-CfServiceRoleArn
             Action:
               - "kms:Create*"
               - "kms:Describe*"
@@ -1488,12 +1483,7 @@ Resources:
             Effect: "Allow"
             Principal:
               AWS:
-                - !Join
-                  - ''
-                  - - 'arn:aws:iam::'
-                    - !Ref AWS::AccountId
-                    - ':user/'
-                    - !ImportValue us-east-1-bootstrap-TravisUser
+                - !ImportValue us-east-1-bootstrap-CfServiceRoleArn
                 - !GetAtt AWSIAMBridgepfServiceUser.Arn
             Action:
               - "kms:Encrypt"
