@@ -1467,8 +1467,7 @@ Resources:
                   - ''
                   - - 'arn:aws:iam::'
                     - !Ref AWS::AccountId
-                    - ':user/'
-                    - !ImportValue us-east-1-bootstrap-TravisUser
+                    - ':root'
                 - !ImportValue us-east-1-bootstrap-CfServiceRoleArn
             Action:
               - "kms:Create*"
@@ -1493,8 +1492,7 @@ Resources:
                   - ''
                   - - 'arn:aws:iam::'
                     - !Ref AWS::AccountId
-                    - ':user/'
-                    - !ImportValue us-east-1-bootstrap-TravisUser
+                    - ':root'
                 - !ImportValue us-east-1-bootstrap-CfServiceRoleArn
                 - !GetAtt AWSIAMBridgepfServiceUser.Arn
             Action:
