@@ -4,7 +4,7 @@ set -e
 # double interpolate vars from travis
 eval export "BridgeHealthcodeRedisKey=\$BridgeHealthcodeRedisKey_$TRAVIS_BRANCH"
 eval export "EmailUnsubscribeToken=\$EmailUnsubscribeToken_$TRAVIS_BRANCH"
-eval export "HibernateConnectionPassword_=\$HibernateConnectionPassword_y_$TRAVIS_BRANCH"
+eval export "HibernateConnectionPassword=\$HibernateConnectionPassword_y_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUrl=\$HibernateConnectionUrl_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUsername=\$HibernateConnectionUsername_$TRAVIS_BRANCH"
 eval export "SynapseApiKey=\$SynapseApiKeyy_$TRAVIS_BRANCH"
