@@ -7,7 +7,7 @@ eval export "EmailUnsubscribeToken=\$EmailUnsubscribeToken_$TRAVIS_BRANCH"
 eval export "HibernateConnectionPassword=\$HibernateConnectionPassword_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUrl=\$HibernateConnectionUrl_$TRAVIS_BRANCH"
 eval export "HibernateConnectionUsername=\$HibernateConnectionUsername_$TRAVIS_BRANCH"
-eval export "SynapseApiKey=\$SynapseApiKeyy_$TRAVIS_BRANCH"
+eval export "SynapseApiKey=\$SynapseApiKey_$TRAVIS_BRANCH"
 eval export "SynapseUser=\$SynapseUser_$TRAVIS_BRANCH"
 
 # CF does not support SecureString, update with AWS CLI instead.
