@@ -116,3 +116,7 @@ lambdas/*.zip
 
 # MAC Crap
 .DS_Store
+
+# temporary files
+temp
+
