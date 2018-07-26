@@ -1,51 +1,51 @@
 template_path: templates/eb_bridgepf.yaml
-stack_name: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
+stack_name: bridgepf-uat
 parameters:
-  AppDeployBucket: {{ environment_variable.AppDeployBucket_uat }}
+  AppDeployBucket: org-sagebridge-bridgepf-deployment-bridgepf-uat
   AppHealthcheckUrl: 'HTTP:80/?study=api'
-  AttachmentBucket: {{ environment_variable.AttachmentBucket_uat }}
-  AwsAutoScalingGroupName: {{ environment_variable.AwsAutoScalingGroupName_uat }}
-  AwsAutoScalingMaxSize: "{{ environment_variable.AwsAutoScalingMaxSize_uat }}"
-  AwsAutoScalingMinSize: "{{ environment_variable.AwsAutoScalingMinSize_uat }}"
-  AwsDefaultVpcId: {{ environment_variable.AwsDefaultVpcId_uat }}
+  AttachmentBucket: org-sagebridge-attachment-uat
+  AwsAutoScalingGroupName: awseb-e-h3rbm6byci-stack-AWSEBAutoScalingGroup-HQ0KDVQJPW9E
+  AwsAutoScalingMaxSize: '3'
+  AwsAutoScalingMinSize: '2'
+  AwsDefaultVpcId: vpc-9c70bbf9
   AwsEbHealthReportingSystem: enhanced
-  AwsKey: {{ environment_variable.AwsKey_uat }}
-  AwsKeyConsents: {{ environment_variable.AwsKeyConsents_uat }}
-  AwsKeyUpload: {{ environment_variable.AwsKeyUpload_uat }}
-  AwsKeyUploadCms: {{ environment_variable.AwsKeyUploadCms_uat }}
-  AwsLoadBalancerName: {{ environment_variable.AwsLoadBalancerName_uat }}
-  AwsSecretKey: {{ environment_variable.AwsSecretKey_uat }}
-  AwsSecretKeyConsents: {{ environment_variable.AwsSecretKeyConsents_uat }}
-  AwsSecretKeyUpload: {{ environment_variable.AwsSecretKeyUpload_uat }}
-  AwsSecretKeyUploadCms: {{ environment_variable.AwsSecretKeyUploadCms_uat }}
+  AwsKey: !ssm /bridgepf-uat/AwsKey
+  AwsKeyConsents: !ssm /bridgepf-uat/AwsKeyConsents
+  AwsKeyUpload: !ssm /bridgepf-uat/AwsKeyUpload
+  AwsKeyUploadCms: !ssm /bridgepf-uat/AwsKeyUploadCms
+  AwsLoadBalancerName: awseb-e-h-AWSEBLoa-AY706DQW6GKJ
+  AwsSecretKey: !ssm /bridgepf-uat/AwsSecretKey
+  AwsSecretKeyConsents: !ssm /bridgepf-uat/AwsSecretKeyConsents
+  AwsSecretKeyUpload: !ssm /bridgepf-uat/AwsSecretKeyUpload
+  AwsSecretKeyUploadCms: !ssm /bridgepf-uat/AwsSecretKeyUploadCms
   AwsSnsBounceNotificationEndpoint: bridgepf-uat-bounce-notifications@sagebase.org
-  AwsSnsNotificationEndpoint: {{ environment_variable.AwsSnsNotificationEndpoint_uat }}
-  BridgeEnv: {{ environment_variable.BridgeEnv_uat }}
-  BridgeHealthcodeRedisKey: {{ environment_variable.BridgeHealthcodeRedisKey_uat }}
+  AwsSnsNotificationEndpoint: bridgepf-uat@sagebase.org
+  BridgeEnv: uat
+  BridgeHealthcodeRedisKey: !ssm /bridgepf-uat/BridgeHealthcodeRedisKey
   BridgeUser: heroku
-  ConsentsBucket: {{ environment_variable.ConsentsBucket_uat }}
-  DNSHostname: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
+  ConsentsBucket: org-sagebridge-consents-uat
+  DNSHostname: bridgepf-uat
   DNSDomain: sagebridge.org
   Domain: ws-staging.sagebridge.org
   EC2InstanceType: t2.small
   ElastiCacheInstanceType:  cache.t2.micro
-  EmailUnsubscribeToken: {{ environment_variable.EmailUnsubscribeToken_uat }}
-  HibernateConnectionPassword: {{ environment_variable.HibernateConnectionPassword_uat }}
-  HibernateConnectionUrl: {{ environment_variable.HibernateConnectionUrl_uat }}
-  HibernateConnectionUsername: {{ environment_variable.HibernateConnectionUsername_uat }}
-  HibernateConnectionUsessl: "True"
-  HostPostfix: {{ environment_variable.HostPostfix_uat }}
+  EmailUnsubscribeToken: !ssm /bridgepf-uat/EmailUnsubscribeToken
+  HibernateConnectionPassword: !ssm /bridgepf-uat/HibernateConnectionPassword
+  HibernateConnectionUrl: !ssm /bridgepf-uat/HibernateConnectionUrl
+  HibernateConnectionUsername: !ssm /bridgepf-uat/HibernateConnectionUsername
+  HibernateConnectionUsessl: 'true'
+  HostPostfix: '-staging.sagebridge.org'
   JavaOpts: '-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar'
-  NewRelicAppName: bridgepf-{{ environment_variable.TRAVIS_BRANCH }}
-  NewRelicLicenseKey: {{ environment_variable.NewRelicLicenseKey }}
-  SnsKey: {{ environment_variable.SnsKey_uat }}
-  SnsSecretKey: {{ environment_variable.SnsSecretKey_uat }}
-  SSLCertArn: {{ environment_variable.SSLCertArn_uat }}
-  SynapseApiKey: {{ environment_variable.SynapseApiKey_uat }}
-  SynapseUser: {{ environment_variable.SynapseUser_uat }}
-  SysopsEmail: {{ environment_variable.SysopsEmail_uat }}
-  UploadBucket: {{ environment_variable.UploadBucket_uat }}
-  UploadCmsCertBucket: {{ environment_variable.UploadCmsCertBucket_uat }}
-  UploadCmsPrivBucket: {{ environment_variable.UploadCmsPrivBucket_uat }}
+  NewRelicAppName: bridgepf-uat
+  NewRelicLicenseKey: !ssm /infra/NewRelicLicenseKey
+  SnsKey: !ssm /bridgepf-uat/SnsKey
+  SnsSecretKey: !ssm /bridgepf-uat/SnsSecretKey
+  SSLCertArn: !ssm /bridgepf-uat/SSLCertArn
+  SynapseApiKey: !ssm /bridgepf-uat/SynapseApiKey
+  SynapseUser: !ssm /bridgepf-uat/SynapseUser
+  SysopsEmail: 'Bridge\ IT\ \<bridge-testing+sysops@sagebase.org\>'
+  UploadBucket: org-sagebridge-upload-uat
+  UploadCmsCertBucket: org-sagebridge-upload-cms-cert-uat
+  UploadCmsPrivBucket: org-sagebridge-upload-cms-priv-uat
   VpcSubnetIds: subnet-2ec6ee06, subnet-e2197187, subnet-3a47a84d, subnet-9095259c, subnet-133c3455, subnet-42b1d178
-  WebservicesUrl: {{ environment_variable.WebservicesUrl_uat }}
+  WebservicesUrl: 'https://webservices-staging.sagebridge.org'
