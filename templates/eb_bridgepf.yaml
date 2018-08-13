@@ -156,6 +156,10 @@ Parameters:
     Type: String
     Default: param_place_holder
     NoEcho: true
+  AwsSolutionStackName:
+    Description: The AWS Solution Stack
+    Type: String
+    Default: param_place_holder
   BridgeEnv:
     Type: String
     Default: dev
@@ -352,7 +356,7 @@ Resources:
     Type: 'AWS::ElasticBeanstalk::ConfigurationTemplate'
     Properties:
       ApplicationName: !Ref AWSEBApplication
-      SolutionStackName: 64bit Amazon Linux 2018.03 v2.7.1 running Java 8
+      SolutionStackName: !Ref AwsSolutionStackName
       OptionSettings:
         # EB environment options
         - Namespace: 'aws:autoscaling:asg'

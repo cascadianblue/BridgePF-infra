@@ -20,6 +20,7 @@ parameters:
   AwsSecretKeyUploadCms: !ssm /bridgepf-develop/AwsSecretKeyUploadCms
   AwsSnsBounceNotificationEndpoint: bridgepf-develop-bounce-notifications@sagebase.org
   AwsSnsNotificationEndpoint: bridgepf-develop@sagebase.org
+  AwsSolutionStackName: '64bit Amazon Linux 2018.03 v2.7.1 running Java 8'
   BridgeEnv: dev
   BridgeHealthcodeRedisKey: !ssm /bridgepf-develop/BridgeHealthcodeRedisKey
   BridgeUser: heroku
