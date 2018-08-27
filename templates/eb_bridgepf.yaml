@@ -175,6 +175,9 @@ Parameters:
   BridgeUser:
     Type: String
     Default: param_place_holder
+  ChannelThrottleTimeoutSeconds:
+    Type: String
+    Default: param_place_holder
   DNSDomain:
     Type: String
     Description: DNS Domain name for deployment
@@ -477,6 +480,9 @@ Resources:
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: BRIDGEPF_SERVICE_USER_SECRET_KEY
           Value: !GetAtt AWSIAMBridgepfServiceUserAccessKey.SecretAccessKey
+        - Namespace: 'aws:elasticbeanstalk:application:environment'
+          OptionName: CHANNEL_THROTTLE_TIMEOUT_SECONDS
+          Value: !Ref ChannelThrottleTimeoutSeconds
         - Namespace: 'aws:elasticbeanstalk:application:environment'
           OptionName: DOMAIN
           Value: !Ref Domain
