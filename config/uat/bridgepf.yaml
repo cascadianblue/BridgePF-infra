@@ -24,7 +24,7 @@ parameters:
   BridgeEnv: uat
   BridgeHealthcodeRedisKey: !ssm /bridgepf-uat/BridgeHealthcodeRedisKey
   BridgeUser: heroku
-  ChannelThrottleTimeoutSeconds: 10
+  ChannelThrottleTimeoutSeconds: '10'
   ConsentsBucket: org-sagebridge-consents-uat
   DNSHostname: bridgepf-uat
   DNSDomain: sagebridge.org
