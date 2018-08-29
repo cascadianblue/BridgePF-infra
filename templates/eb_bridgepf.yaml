@@ -618,6 +618,7 @@ Resources:
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth'
         - 'arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService'
+        - 'arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM'
   AWSIAMRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -1482,6 +1483,7 @@ Resources:
                     - ':root'
                 - !ImportValue us-east-1-bootstrap-CfServiceRoleArn
                 - !GetAtt AWSIAMBridgepfServiceUser.Arn
+                - !GetAtt AWSIAMServiceRole.Arn
             Action:
               - "kms:Encrypt"
               - "kms:Decrypt"
