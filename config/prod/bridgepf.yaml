@@ -24,7 +24,7 @@ parameters:
   BridgeEnv: prod
   BridgeHealthcodeRedisKey: !ssm /bridgepf-prod/BridgeHealthcodeRedisKey
   BridgeUser: heroku
-  ChannelThrottleTimeoutSeconds: '10'
+  ChannelThrottleTimeoutSeconds: '300'
   ConsentsBucket: org-sagebridge-consents-prod
   DNSHostname: bridgepf-prod
   DNSDomain: sagebridge.org
