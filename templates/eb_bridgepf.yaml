@@ -97,69 +97,58 @@ Outputs:
 Parameters:
   AppDeployBucket:
     Type: String
-    Default: param_place_holder
   AppHealthcheckUrl:
     Type: String
     Description: The AWS EB health check path
-    Default: param_place_holder
   AwsAutoScalingGroupName:
     Type: String
-    Default: param_place_holder
   AwsAutoScalingMaxSize:
     Type: String
-    Default: param_place_holder
+    Default: '2'
   AwsAutoScalingMinSize:
     Type: String
-    Default: param_place_holder
+    Default: '1'
   AwsDefaultVpcId:
+    Type: "AWS::EC2::VPC::Id"
     Description: The AWS account's default VPC id
-    Type: String
-    Default: param_place_holder
   AwsEbHealthReportingSystem:
     Type: String
-    Default: param_place_holder
+    Default: basic
+    AllowedValues:
+      - basic
+      - enhanced
+    ConstraintDescription: must be either basic or enhanced
   AwsSnsBounceNotificationEndpoint:
     Type: String
     Description: Email address for SNS bounce notifications
   AwsSnsNotificationEndpoint:
     Type: String
     Description: Email address for AWS SNS notifications
-    Default: param_place_holder
   AwsKey:
     Type: String
-    Default: param_place_holder
   AwsKeyConsents:
     Type: String
-    Default: param_place_holder
   AwsKeyUpload:
     Type: String
-    Default: param_place_holder
   AwsKeyUploadCms:
     Type: String
-    Default: param_place_holder
   AwsSecretKey:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   AwsLoadBalancerName:
     Type: String
-    Default: param_place_holder
   AwsSecretKeyConsents:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   AwsSecretKeyUpload:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   AwsSecretKeyUploadCms:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   AwsSolutionStackName:
     Description: The AWS Solution Stack
     Type: String
-    Default: param_place_holder
   BridgeEnv:
     Type: String
     Default: dev
@@ -170,22 +159,20 @@ Parameters:
     ConstraintDescription: must specify dev, uat or prod.
   BridgeHealthcodeRedisKey:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   BridgeUser:
     Type: String
-    Default: param_place_holder
+    Default: heroku
   ChannelThrottleTimeoutSeconds:
     Type: String
-    Default: param_place_holder
+    Default: '10'
   DNSDomain:
     Type: String
     Description: DNS Domain name for deployment
-    Default: param_place_holder
+    Default: sagebridge.org
   DNSHostname:
     Type: String
     Description: DNS Hostname for deployment
-    Default: param_place_holder
   Domain:
     Type: String
     Description: The web service hostname
@@ -267,7 +254,7 @@ Parameters:
       - f1.16xlarge
   EmailUnsubscribeToken:
     Type: String
-    Default: param_place_holder
+    NoEcho: true
   ElastiCacheInstanceType:
     Type: String
     Description: Instance type to use for Elastic Cache cluster
@@ -287,68 +274,54 @@ Parameters:
       - cache.r3.8xlarge
   HibernateConnectionPassword:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   HibernateConnectionUrl:
     Type: String
-    Default: param_place_holder
   HibernateConnectionUsername:
     Type: String
-    Default: param_place_holder
   HibernateConnectionUsessl:
     Type: String
-    Default: param_place_holder
+    Default: true
+    AllowedValues:
+      - true
+      - false
+    ConstraintDescription: must be either true or false
   HostPostfix:
     Type: String
-    Default: param_place_holder
   JavaOpts:
     Type: String
-    Default: param_place_holder
   NewRelicAppName:
     Type: String
-    Default: param_place_holder
   NewRelicLicenseKey:
     Type: String
-    Default: param_place_holder
     NoEcho: true
   SnsKey:
     Type: String
-    Default: param_place_holder
   SnsSecretKey:
     Type: String
     NoEcho: true
-    Default: param_place_holder
   SSLCertArn:
     Description: SSL certificate for load balancer
     Type: String
-    Default: param_place_holder
   SynapseApiKey:
     Type: String
-    Default: param_place_holder
+    NoEcho: true
   SynapseUser:
     Type: String
-    Default: param_place_holder
   SysopsEmail:
     Type: String
-    Default: param_place_holder
   WebservicesUrl:
     Type: String
-    Default: param_place_holder
   AttachmentBucket:
     Type: String
-    Default: param_place_holder
   ConsentsBucket:
     Type: String
-    Default: param_place_holder
   UploadBucket:
     Type: String
-    Default: param_place_holder
   UploadCmsCertBucket:
     Type: String
-    Default: param_place_holder
   UploadCmsPrivBucket:
     Type: String
-    Default: param_place_holder
   VpcSubnetIds:
     Type: List<AWS::EC2::Subnet::Id>
     ConstraintDescription: List of VPC subnet IDs (i.e. subnet-1e58fe09, subnet-fb88fe11, ..)
