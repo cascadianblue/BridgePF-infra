@@ -165,7 +165,7 @@ Parameters:
     Default: heroku
   ChannelThrottleTimeoutSeconds:
     Type: String
-    Default: '10'
+    Default: '300'
   DNSDomain:
     Type: String
     Description: DNS Domain name for deployment
