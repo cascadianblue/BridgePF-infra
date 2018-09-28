@@ -29,7 +29,7 @@ parameters:
   DNSHostname: bridgepf-prod
   DNSDomain: sagebridge.org
   Domain: ws.sagebridge.org
-  EC2InstanceType: t3.medium
+  EC2InstanceType: t2.medium
   ElastiCacheInstanceType:  cache.t2.micro
   EmailUnsubscribeToken: !ssm /bridgepf-prod/EmailUnsubscribeToken
   HibernateConnectionPassword: !ssm /bridgepf-prod/HibernateConnectionPassword
