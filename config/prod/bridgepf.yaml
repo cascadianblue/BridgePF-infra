@@ -5,8 +5,8 @@ parameters:
   AppHealthcheckUrl: 'HTTP:80/?study=api'
   AttachmentBucket: org-sagebridge-attachment-prod
   AwsAutoScalingGroupName: awseb-e-693tmvruhq-stack-AWSEBAutoScalingGroup-ZUQRSM8OL33O
-  AwsAutoScalingMaxSize: "6"
-  AwsAutoScalingMinSize: "3"
+  AwsAutoScalingMaxSize: "9"
+  AwsAutoScalingMinSize: "9"
   AwsDefaultVpcId: vpc-9c70bbf9
   AwsEbHealthReportingSystem: enhanced
   AwsKey: !ssm /bridgepf-prod/AwsKey
@@ -29,7 +29,7 @@ parameters:
   DNSHostname: bridgepf-prod
   DNSDomain: sagebridge.org
   Domain: ws.sagebridge.org
-  EC2InstanceType: t2.small
+  EC2InstanceType: t3.medium
   ElastiCacheInstanceType:  cache.t2.micro
   EmailUnsubscribeToken: !ssm /bridgepf-prod/EmailUnsubscribeToken
   HibernateConnectionPassword: !ssm /bridgepf-prod/HibernateConnectionPassword
