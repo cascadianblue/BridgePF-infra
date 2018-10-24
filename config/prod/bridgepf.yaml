@@ -5,8 +5,8 @@ parameters:
   AppHealthcheckUrl: 'HTTP:80/?study=api'
   AttachmentBucket: org-sagebridge-attachment-prod
   AwsAutoScalingGroupName: awseb-e-693tmvruhq-stack-AWSEBAutoScalingGroup-ZUQRSM8OL33O
-  AwsAutoScalingMaxSize: "9"
-  AwsAutoScalingMinSize: "9"
+  AwsAutoScalingMaxSize: "3"
+  AwsAutoScalingMinSize: "3"
   AwsDefaultVpcId: vpc-9c70bbf9
   AwsEbHealthReportingSystem: enhanced
   AwsKey: !ssm /bridgepf-prod/AwsKey
