@@ -94,6 +94,10 @@ Outputs:
     Value: !Ref AWSS3UserSignedConsentsDownloadBucket
     Export:
       Name: !Sub '${AWS::StackName}-UserSignedConsentsDownloadBucket'
+  LoadBalancerAccessLogsBucket:
+    Value: !Ref LoadBalancerAccessLogsBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-LoadBalancerAccessLogsBucket'
 Parameters:
   AppDeployBucket:
     Type: String
@@ -537,6 +541,27 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref AppDeployBucket
+  LoadBalancerAccessLogsBucket:
+    Type: 'AWS::S3::Bucket'
+  LoadBalancerAccessLogsBucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref LoadBalancerAccessLogsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: ModAccess
+            Action:
+              - 's3:PutObject'
+            Effect: Allow
+            Resource:
+              - !Join
+                - ''
+                - - !GetAtt LoadBalancerAccessLogsBucket.Arn
+                  - '/*'
+            Principal:
+              AWS:
+                - 127311923021
   AWSR53RecordSet:
     Type: 'AWS::Route53::RecordSet'
     Properties:
