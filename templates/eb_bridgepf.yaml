@@ -695,7 +695,8 @@ Resources:
                       - "StatusLogger No log4j2 configuration file found"
                       - "StrictValidationHandler.handleErrors"
                       - "Strict upload validation error"
-                      - org.hibernate'
+                      - org.hibernate
+                      - play.core.server.netty.PlayDefaultUpstreamHandler'
       MetricTransformations:
         -
           MetricValue: "1"
