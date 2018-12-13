@@ -868,7 +868,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{ $.status = 400 }'
+      FilterPattern: '{ ($.status = 400) && ($.study != "psu-m2c2") }'
       MetricTransformations:
         -
           MetricValue: "1"
@@ -903,7 +903,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{ $.status = 403 }'
+      FilterPattern: '{ ($.status = 403) && ($.study != "psu-m2c2") }'
       MetricTransformations:
         -
           MetricValue: "1"
@@ -938,7 +938,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{ $.status = 409 }'
+      FilterPattern: '{ ($.status = 409) && ($.study != "psu-m2c2") }'
       MetricTransformations:
         -
           MetricValue: "1"
@@ -973,7 +973,7 @@ Resources:
         - - /aws/elasticbeanstalk
           - !Ref 'AWS::StackName'
           - var/log/web-1.log
-      FilterPattern: '{( $.status = 412 ) && ( $.uri != "*/signIn*" ) && ( $.uri != "*/verifyEmail*" ) }'
+      FilterPattern: '{( $.status = 412 ) && ( $.uri != "*/signIn*" ) && ( $.uri != "*/verifyEmail*" ) && ($.study != "psu-m2c2") }'
       MetricTransformations:
         -
           MetricValue: "1"
