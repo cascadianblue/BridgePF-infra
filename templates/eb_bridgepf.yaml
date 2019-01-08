@@ -359,7 +359,7 @@ Resources:
               - AWSEC2SecurityGroup
         - Namespace: 'aws:autoscaling:updatepolicy:rollingupdate'
           OptionName: RollingUpdateEnabled
-          Value: true
+          Value: 'true'
         - Namespace: 'aws:autoscaling:updatepolicy:rollingupdate'
           OptionName: RollingUpdateType
           Value: 'Immutable'
@@ -392,13 +392,13 @@ Resources:
           Value: !Ref AwsEbHealthReportingSystem
         - Namespace: 'aws:elasticbeanstalk:hostmanager'
           OptionName: LogPublicationControl
-          Value: true
+          Value: 'true'
         - Namespace: 'aws:elasticbeanstalk:xray'
           OptionName: XRayEnabled
-          Value: false
+          Value: 'false'
         - Namespace: 'aws:elb:loadbalancer'
           OptionName: LoadBalancerHTTPPort
-          Value: 80
+          Value: '80'
         - Namespace: 'aws:elb:healthcheck'
           OptionName: Target
           Value: !Ref AppHealthcheckUrl
@@ -587,7 +587,7 @@ Resources:
     Properties:
       HealthCheckConfig:
         FullyQualifiedDomainName: !GetAtt AWSEBEnvironment.EndpointURL
-        Port: "443"
+        Port: 443
         Type: "HTTPS"
         ResourcePath: "/?study=api"
       HealthCheckTags:
@@ -724,7 +724,6 @@ Resources:
       TreatMissingData: notBreaching
   AWSCWWebErrorMetricFilter:
     Type: "AWS::Logs::MetricFilter"
-    DependsOn: AWSLogsLogGroupWebError
     Properties:
       LogGroupName: !Ref AWSLogsLogGroupWebError
       FilterPattern: 'Error'
@@ -1049,21 +1048,20 @@ Resources:
       VpcId: !Ref AwsDefaultVpcId
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
-          FromPort: '443'
-          ToPort: '443'
+          FromPort: 443
+          ToPort: 443
           IpProtocol: tcp
         - CidrIp: 0.0.0.0/0
-          FromPort: '80'
-          ToPort: '80'
+          FromPort: 80
+          ToPort: 80
           IpProtocol: tcp
       SecurityGroupEgress:
         - CidrIp: 0.0.0.0/0
-          FromPort: '80'
-          ToPort: '80'
+          FromPort: 80
+          ToPort: 80
           IpProtocol: tcp
   AWSEC2SecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
-    DependsOn: AWSLBSecurityGroup
     Properties:
       GroupName: !Join
         - '-'
@@ -1073,8 +1071,8 @@ Resources:
       VpcId: !Ref AwsDefaultVpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '80'
-          ToPort: '80'
+          FromPort: 80
+          ToPort: 80
           SourceSecurityGroupId: !Ref AWSLBSecurityGroup
   AWSElastiCacheSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
@@ -1086,8 +1084,8 @@ Resources:
       VpcId: !Ref AwsDefaultVpcId
       SecurityGroupIngress :
         - IpProtocol : tcp
-          FromPort : '6379'
-          ToPort : '6379'
+          FromPort : 6379
+          ToPort : 6379
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
   AWSECCacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
@@ -1108,13 +1106,12 @@ Resources:
     Properties:
       Engine: redis
       CacheNodeType: !Ref ElastiCacheInstanceType
-      NumCacheNodes: '1'
+      NumCacheNodes: 1
       VpcSecurityGroupIds:
         - !GetAtt AWSElastiCacheSecurityGroup.GroupId
       CacheSubnetGroupName: !Ref AWSECCacheSubnetGroup
   AWSEC2RdsSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
-    DependsOn: AWSEC2SecurityGroup
     Properties:
       GroupDescription: !Join
         - '-'
@@ -1123,8 +1120,8 @@ Resources:
       VpcId: !Ref AwsDefaultVpcId
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '3306'
-          ToPort: '3306'
+          FromPort: 3306
+          ToPort: 3306
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
   # Tests running on travis requires direct access to RDS (should only apply to Dev RDS instance)
   # https://docs.travis-ci.com/user/ip-addresses/
@@ -1139,8 +1136,8 @@ Resources:
       VpcId: !Ref AwsDefaultVpcId
       SecurityGroupIngress:
         - CidrIp: '0.0.0.0/0'
-          FromPort: '3306'
-          ToPort: '3306'
+          FromPort: 3306
+          ToPort: 3306
           IpProtocol: tcp
   AWSCWDashboard:
     Type: 'AWS::CloudWatch::Dashboard'
@@ -1355,7 +1352,6 @@ Resources:
               - 'arn:aws:s3:::org-sagebridge-consents-local/*'
   IAMBridgepfECManagedPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
-    Description: Provide full access to ElastiCache except for delete
     Properties:
         PolicyDocument:
           Version: '2012-10-17'
@@ -1375,7 +1371,6 @@ Resources:
             Resource: "*"
   IAMBridgepfSQSManagedPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
-    Description: Provide full access to SQA except for create
     Properties:
         PolicyDocument:
           Version: '2012-10-17'
