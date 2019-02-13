@@ -526,6 +526,13 @@ Resources:
         - '-'
         - - !Ref 'AWS::StackName'
           - application
+      ResourceLifecycleConfig:
+        ServiceRole: !GetAtt AWSIAMServiceRole.Arn
+        VersionLifecycleConfig:
+          MaxAgeRule:
+            DeleteSourceFromS3: true
+            Enabled: true
+            MaxAgeInDays: 90
   AWSEBEnvironment:
     Type: 'AWS::ElasticBeanstalk::Environment'
     Properties:
