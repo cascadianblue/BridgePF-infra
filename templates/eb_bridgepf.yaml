@@ -299,6 +299,8 @@ Parameters:
   NewRelicLicenseKey:
     Type: String
     NoEcho: true
+  Server2EC2SecurityGroup:
+    Type: String
   SnsKey:
     Type: String
   SnsSecretKey:
@@ -1094,6 +1096,10 @@ Resources:
           FromPort : 6379
           ToPort : 6379
           SourceSecurityGroupId: !Ref AWSEC2SecurityGroup
+        - IpProtocol : tcp
+          FromPort : 6379
+          ToPort : 6379
+          SourceSecurityGroupId: !Ref Server2EC2SecurityGroup
   AWSECCacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
     Properties:
