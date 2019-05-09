@@ -40,6 +40,7 @@ parameters:
   JavaOpts: '-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar'
   NewRelicAppName: bridgepf-develop
   NewRelicLicenseKey: !ssm /infra/NewRelicLicenseKey
+  Server2EC2SecurityGroup: sg-022ab4a6145aedd83
   SnsKey: !ssm /bridgepf-develop/SnsKey
   SnsSecretKey: !ssm /bridgepf-develop/SnsSecretKey
   SSLCertArn: !ssm /bridgepf-develop/SSLCertArn
