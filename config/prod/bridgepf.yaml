@@ -1,54 +1,10 @@
 template_path: eb_bridgepf.yaml
 stack_name: bridgepf-prod
 parameters:
-  AppDeployBucket: org-sagebridge-bridgepf-deployment-bridgepf-prod
-  AppHealthcheckUrl: 'HTTP:80/?study=api'
-  AttachmentBucket: org-sagebridge-attachment-prod
-  AwsAutoScalingGroupName: awseb-e-693tmvruhq-stack-AWSEBAutoScalingGroup-ZUQRSM8OL33O
-  AwsAutoScalingMaxSize: "3"
-  AwsAutoScalingMinSize: "3"
   AwsDefaultVpcId: vpc-9c70bbf9
-  AwsEbHealthReportingSystem: enhanced
-  AwsKey: !ssm /bridgepf-prod/AwsKey
-  AwsKeyConsents: !ssm /bridgepf-prod/AwsKeyConsents
-  AwsKeyUpload: !ssm /bridgepf-prod/AwsKeyUpload
-  AwsKeyUploadCms: !ssm /bridgepf-prod/AwsKeyUploadCms
-  AwsLoadBalancerName: awseb-e-6-AWSEBLoa-15W6EU8CCBK5W
-  AwsSecretKey: !ssm /bridgepf-prod/AwsSecretKey
-  AwsSecretKeyConsents: !ssm /bridgepf-prod/AwsSecretKeyConsents
-  AwsSecretKeyUpload: !ssm /bridgepf-prod/AwsSecretKeyUpload
-  AwsSecretKeyUploadCms: !ssm /bridgepf-prod/AwsSecretKeyUploadCms
   AwsSnsBounceNotificationEndpoint: bridge-bounce-notifications@sagebase.org
-  AwsSnsNotificationEndpoint: bridgeops@sagebase.org
-  AwsSolutionStackName: '64bit Amazon Linux 2018.03 v2.7.3 running Java 8'
-  BridgeEnv: prod
-  BridgeHealthcodeRedisKey: !ssm /bridgepf-prod/BridgeHealthcodeRedisKey
-  BridgeUser: heroku
-  ChannelThrottleTimeoutSeconds: '300'
-  ConsentsBucket: org-sagebridge-consents-prod
   DNSHostname: bridgepf-prod
-  DNSDomain: sagebridge.org
-  Domain: ws.sagebridge.org
-  EC2InstanceType: t2.medium
   ElastiCacheInstanceType:  cache.t2.micro
-  EmailUnsubscribeToken: !ssm /bridgepf-prod/EmailUnsubscribeToken
-  HibernateConnectionPassword: !ssm /bridgepf-prod/HibernateConnectionPassword
-  HibernateConnectionUrl: !ssm /bridgepf-prod/HibernateConnectionUrl
-  HibernateConnectionUsername: !ssm /bridgepf-prod/HibernateConnectionUsername
-  HibernateConnectionUsessl: 'true'
-  HostPostfix: '.sagebridge.org'
-  JavaOpts: '-Dnewrelic.config.file=/var/app/current/newrelic/newrelic.yml -javaagent:/usr/local/lib/newrelic/com.newrelic.agent.java.newrelic-agent.jar'
-  NewRelicAppName: bridgepf-prod
-  NewRelicLicenseKey: !ssm /infra/NewRelicLicenseKey
   Server2EC2SecurityGroup: sg-062b91cc8fe3f657d
-  SnsKey: !ssm /bridgepf-prod/SnsKey
-  SnsSecretKey: !ssm /bridgepf-prod/SnsSecretKey
-  SSLCertArn: !ssm /bridgepf-prod/SSLCertArn
-  SynapseApiKey: !ssm /bridgepf-prod/SynapseApiKey
-  SynapseUser: !ssm /bridgepf-prod/SynapseUser
-  SysopsEmail: 'Bridge\ IT\ \<bridgeit@sagebase.org\>'
-  UploadBucket: org-sagebridge-upload-prod
-  UploadCmsCertBucket: org-sagebridge-upload-cms-cert-prod
-  UploadCmsPrivBucket: org-sagebridge-upload-cms-priv-prod
+  Server2EndpointUrl: bridgeserver2-prod.sagebridge.org
   VpcSubnetIds: subnet-2ec6ee06, subnet-e2197187, subnet-3a47a84d, subnet-9095259c, subnet-133c3455, subnet-42b1d178
-  WebservicesUrl: 'https://webservices.sagebridge.org'
