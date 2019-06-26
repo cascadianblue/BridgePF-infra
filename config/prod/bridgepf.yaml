@@ -1,10 +1,6 @@
 template_path: eb_bridgepf.yaml
 stack_name: bridgepf-prod
 parameters:
-  AwsDefaultVpcId: vpc-9c70bbf9
   AwsSnsBounceNotificationEndpoint: bridge-bounce-notifications@sagebase.org
   DNSHostname: bridgepf-prod
-  ElastiCacheInstanceType:  cache.t2.micro
-  Server2EC2SecurityGroup: sg-062b91cc8fe3f657d
   Server2EndpointUrl: bridgeserver2-prod.sagebridge.org
-  VpcSubnetIds: subnet-2ec6ee06, subnet-e2197187, subnet-3a47a84d, subnet-9095259c, subnet-133c3455, subnet-42b1d178
