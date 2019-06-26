@@ -1,15 +1,6 @@
 Description: Resources for BridgePF Application
 AWSTemplateFormatVersion: 2010-09-09
 Outputs:
-  AWSECacheUrl:
-    Value: !Join
-      - ''
-      - - 'redis://'
-        - !GetAtt AWSElastiCacheCluster.RedisEndpoint.Address
-        - ':'
-        - !GetAtt AWSElastiCacheCluster.RedisEndpoint.Port
-    Export:
-      Name: !Sub '${AWS::StackName}-ElastiCacheUrl'
   AWSS3UserSignedConsentsDownloadBucket:
     Value: !Ref AWSS3UserSignedConsentsDownloadBucket
     Export:
@@ -19,40 +10,15 @@ Outputs:
     Export:
       Name: !Sub '${AWS::StackName}-LoadBalancerAccessLogsBucket'
 Parameters:
-  AwsDefaultVpcId:
-    Type: "AWS::EC2::VPC::Id"
-    Description: The AWS account's default VPC id
   AwsSnsBounceNotificationEndpoint:
     Type: String
     Description: Email address for SNS bounce notifications
   DNSHostname:
     Type: String
     Description: DNS Hostname for deployment
-  ElastiCacheInstanceType:
-    Type: String
-    Description: Instance type to use for Elastic Cache cluster
-    Default: cache.t2.micro
-    AllowedValues:
-      - cache.t2.micro
-      - cache.t2.small
-      - cache.t2.medium
-      - cache.m3.medium
-      - cache.m3.large
-      - cache.m3.xlarge
-      - cache.m3.2xlarge
-      - cache.r3.large
-      - cache.r3.xlarge
-      - cache.r3.2xlarge
-      - cache.r3.4xlarge
-      - cache.r3.8xlarge
-  Server2EC2SecurityGroup:
-    Type: AWS::EC2::SecurityGroup::Id
   Server2EndpointUrl:
     Type: String
     Description: Server2 endpoint URL, so we can forward Route 53 records to Server2. For Example, bridgeserver2-prod.sagebridge.org
-  VpcSubnetIds:
-    Type: List<AWS::EC2::Subnet::Id>
-    ConstraintDescription: List of VPC subnet IDs (i.e. subnet-1e58fe09, subnet-fb88fe11, ..)
 Resources:
   LoadBalancerAccessLogsBucket:
     Type: 'AWS::S3::Bucket'
@@ -94,42 +60,6 @@ Resources:
         -
           Endpoint: !Ref AwsSnsBounceNotificationEndpoint
           Protocol: "email"
-  AWSElastiCacheSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: !Join
-        - '-'
-        - - !Ref 'AWS::StackName'
-          - AWSElastiCacheSecurityGroup
-      VpcId: !Ref AwsDefaultVpcId
-      SecurityGroupIngress :
-        - IpProtocol : tcp
-          FromPort : 6379
-          ToPort : 6379
-          SourceSecurityGroupId: !Ref Server2EC2SecurityGroup
-  AWSECCacheSubnetGroup:
-    Type: "AWS::ElastiCache::SubnetGroup"
-    Properties:
-      Description: !Join
-          - '-'
-          - - !Ref 'AWS::StackName'
-            - AWSECCacheSubnetGroup
-      SubnetIds:
-        - !Select [ 0, !Ref VpcSubnetIds ]
-        - !Select [ 1, !Ref VpcSubnetIds ]
-        - !Select [ 2, !Ref VpcSubnetIds ]
-        - !Select [ 3, !Ref VpcSubnetIds ]
-        - !Select [ 4, !Ref VpcSubnetIds ]
-        - !Select [ 5, !Ref VpcSubnetIds ]
-  AWSElastiCacheCluster:
-    Type: 'AWS::ElastiCache::CacheCluster'
-    Properties:
-      Engine: redis
-      CacheNodeType: !Ref ElastiCacheInstanceType
-      NumCacheNodes: 1
-      VpcSecurityGroupIds:
-        - !GetAtt AWSElastiCacheSecurityGroup.GroupId
-      CacheSubnetGroupName: !Ref AWSECCacheSubnetGroup
   # Buckets for signed consents that users can download
   AWSS3UserSignedConsentsDownloadBucket:
     Type: 'AWS::S3::Bucket'
